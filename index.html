@@ -207,13 +207,20 @@
       gap:1px;background:var(--g100);max-width:860px;margin:0 auto}
     .vd-col{background:var(--white);padding:2.6rem 3rem}
     .vd-p{font-size:.88rem;color:var(--g600);line-height:1.9}
-    @media(max-width:680px){
-      .venn-circles{height:200px}
-      .venn-content{grid-template-columns:1fr 120px 1fr}
-      .venn-side{padding:0 1.5rem}
-      .venn-mid{width:108px;height:108px}
+    @media(max-width:740px){
+      /* Venn: drop to vertical stack, hide decorative circles */
+      .venn-outer{padding:0}
+      .venn-circles{height:auto;position:static}
+      .venn-c-l,.venn-c-r{display:none}
+      .venn-content{
+        position:static;
+        display:flex;flex-direction:column;
+        align-items:center;gap:2rem;padding:2.5rem 0}
+      .venn-side{padding:0;width:100%;max-width:300px;text-align:center}
+      .vs-list{align-items:center}
+      .venn-mid{margin:0;width:130px;height:130px}
       .venn-detail{grid-template-columns:1fr}
-      .vd-col{padding:2rem}
+      .vd-col{padding:2rem 1.8rem}
     }
 
     /* ── APPROACH ── */
@@ -261,59 +268,13 @@
       grid-template-columns:repeat(5,1fr);gap:1px;
       background:var(--g200)}
     .sec-card{position:relative;aspect-ratio:4/5;
-      overflow:hidden;background:var(--g800);cursor:pointer}
-    /* Uniform cinematic filter on all sector images */
+      overflow:hidden;background:var(--g800)}
     .sec-card img{position:absolute;inset:0;width:100%;height:100%;
       object-fit:cover;object-position:center;
-      filter:brightness(.58) contrast(1.22) saturate(.28);
-      transition:transform .55s ease,filter .35s ease}
-    .sec-card:hover img{transform:scale(1.05);
-      filter:brightness(.45) contrast(1.25) saturate(.28)}
+      filter:brightness(.58) contrast(1.22) saturate(.28)}
     .sec-overlay{position:absolute;inset:0;
       background:linear-gradient(to top,rgba(0,0,0,.75) 0%,transparent 55%)}
     /* Label hidden by default, shown on hover */
-    .sec-plus{position:absolute;top:50%;left:50%;
-      transform:translate(-50%,-50%) scale(.8);
-      width:28px;height:28px;border:1px solid rgba(255,255,255,.25);
-      display:flex;align-items:center;justify-content:center;
-      opacity:0;transition:opacity .3s,transform .3s}
-    .sec-plus svg{width:12px;height:12px;stroke:#fff;fill:none;stroke-width:1.5}
-    .sec-card:hover .sec-plus{opacity:1;transform:translate(-50%,-50%) scale(1)}
-
-    /* ── MODAL ── */
-    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.65);
-      z-index:1000;display:flex;align-items:center;justify-content:center;
-      padding:2rem;opacity:0;pointer-events:none;
-      transition:opacity .3s}
-    .modal-backdrop.open{opacity:1;pointer-events:all}
-    .modal{background:var(--white);max-width:620px;width:100%;
-      max-height:86vh;overflow-y:auto;
-      transform:translateY(14px);transition:transform .3s;
-      position:relative}
-    .modal-backdrop.open .modal{transform:none}
-    .modal-img{height:200px;overflow:hidden;position:relative}
-    .modal-img img{width:100%;height:100%;object-fit:cover;
-      filter:brightness(.65) contrast(1.2) saturate(.28)}
-    .modal-img-overlay{position:absolute;inset:0;
-      background:linear-gradient(to top,rgba(0,0,0,.5),transparent)}
-    .modal-body{padding:2.6rem 3rem 3rem}
-    .modal-tag{font-size:.58rem;font-weight:600;letter-spacing:.22em;
-      text-transform:uppercase;color:var(--red);margin-bottom:.9rem;
-      display:flex;align-items:center;gap:8px}
-    .modal-tag::before{content:'';width:12px;height:1px;background:var(--red)}
-    .modal-h{font-family:var(--serif);font-size:1.6rem;font-weight:500;
-      line-height:1.2;margin-bottom:1.2rem}
-    .modal-p{font-size:.88rem;color:var(--g600);line-height:1.95}
-    .modal-angle{margin-top:1.8rem;padding:1.2rem 1.5rem;
-      background:var(--off);border-left:3px solid var(--red)}
-    .modal-angle p{font-family:var(--serif);font-size:.9rem;
-      font-style:italic;color:var(--g800);line-height:1.75}
-    .modal-close{position:absolute;top:.9rem;right:.9rem;
-      background:rgba(0,0,0,.35);border:none;color:#fff;
-      width:30px;height:30px;cursor:pointer;
-      display:flex;align-items:center;justify-content:center;
-      font-size:1.1rem;line-height:1;transition:background .2s;z-index:10}
-    .modal-close:hover{background:var(--red)}
 
     /* ── PHOTO BAND ── */
     .photo-band{position:relative;height:380px;overflow:hidden}
@@ -678,85 +639,58 @@
   </div>
   <div class="sectors-grid container">
 
-    <div class="sec-card" data-sector="energy" tabindex="0" role="button" aria-label="Energy">
+    <div class="sec-card" data-sector="energy" aria-label="Energy">
       <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
       <div class="sec-overlay"></div>
-      <div class="sec-plus"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12"/></svg></div>
     </div>
 
-    <div class="sec-card" data-sector="infrastructure" tabindex="0" role="button" aria-label="Infrastructure">
+    <div class="sec-card" data-sector="infrastructure" aria-label="Infrastructure">
       <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
       <div class="sec-overlay"></div>
-      <div class="sec-plus"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12"/></svg></div>
     </div>
 
-    <div class="sec-card" data-sector="water" tabindex="0" role="button" aria-label="Water">
+    <div class="sec-card" data-sector="water" aria-label="Water">
       <img src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
       <div class="sec-overlay"></div>
-      <div class="sec-plus"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12"/></svg></div>
     </div>
 
-    <div class="sec-card" data-sector="logistics" tabindex="0" role="button" aria-label="Logistics">
+    <div class="sec-card" data-sector="logistics" aria-label="Logistics">
       <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
       <div class="sec-overlay"></div>
-      <div class="sec-plus"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12"/></svg></div>
     </div>
 
-    <div class="sec-card" data-sector="digital" tabindex="0" role="button" aria-label="Digital Infrastructure">
+    <div class="sec-card" data-sector="digital" aria-label="Digital Infrastructure">
       <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
       <div class="sec-overlay"></div>
-      <div class="sec-plus"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12"/></svg></div>
     </div>
 
-    <div class="sec-card" data-sector="datacenters" tabindex="0" role="button" aria-label="Data Centers">
+    <div class="sec-card" data-sector="datacenters" aria-label="Data Centers">
       <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
       <div class="sec-overlay"></div>
-      <div class="sec-plus"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12"/></svg></div>
     </div>
 
-    <div class="sec-card" data-sector="ai" tabindex="0" role="button" aria-label="AI Infrastructure">
+    <div class="sec-card" data-sector="ai" aria-label="AI Infrastructure">
       <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
       <div class="sec-overlay"></div>
-      <div class="sec-plus"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12"/></svg></div>
     </div>
 
-    <div class="sec-card" data-sector="realestate" tabindex="0" role="button" aria-label="Real Estate">
+    <div class="sec-card" data-sector="realestate" aria-label="Real Estate">
       <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
       <div class="sec-overlay"></div>
-      <div class="sec-plus"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12"/></svg></div>
     </div>
 
-    <div class="sec-card" data-sector="hospitality" tabindex="0" role="button" aria-label="Hospitality">
+    <div class="sec-card" data-sector="hospitality" aria-label="Hospitality">
       <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
       <div class="sec-overlay"></div>
-      <div class="sec-plus"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12"/></svg></div>
     </div>
 
-    <div class="sec-card" data-sector="circular" tabindex="0" role="button" aria-label="Circular Economy">
+    <div class="sec-card" data-sector="circular" aria-label="Circular Economy">
       <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
       <div class="sec-overlay"></div>
-      <div class="sec-plus"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12"/></svg></div>
     </div>
 
   </div>
 </section>
-
-<!-- SECTOR MODAL -->
-<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true">
-  <div class="modal" id="modalBox">
-    <button class="modal-close" id="modalClose" aria-label="Close">&#215;</button>
-    <div class="modal-img">
-      <img id="modalImg" src="" alt=""/>
-      <div class="modal-img-overlay"></div>
-    </div>
-    <div class="modal-body">
-      <div class="modal-tag" id="modalTag">Sector</div>
-      <h3 class="modal-h" id="modalTitle"></h3>
-      <p class="modal-p" id="modalBody"></p>
-      <div class="modal-angle"><p id="modalAngle"></p></div>
-    </div>
-  </div>
-</div>
 
 <!-- TEAM -->
 <section id="team">
@@ -989,104 +923,6 @@
     });
   });
 
-  // Sector data
-  var sectors = {
-    energy:{
-      title:'Energy',
-      img:'https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=900&q=85',
-      body:'The energy sector is undergoing its most significant structural transformation in a century. Driven by decarbonisation mandates, grid instability, and the electrification of transport and industry, capital requirements are vast and largely unmet by traditional utilities alone. Renewable generation, battery storage, distributed energy resources, and grid flexibility services represent a generation of platform-building opportunity.',
-      angle:'Telam Partners targets specialist energy operators with deep knowledge of grid dynamics, permitting and power purchase agreement structures, and builds institutional platforms around their expertise to attract long-term infrastructure capital.'
-    },
-    infrastructure:{
-      title:'Infrastructure',
-      img:'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=900&q=85',
-      body:'Essential infrastructure offers the predictable, inflation-linked returns that pension funds and sovereign wealth vehicles demand. The opportunity in Southern Europe is significant: decades of under-investment relative to Northern European peers, combined with EU structural funding, has created a pipeline of assets requiring both capital and operational expertise.',
-      angle:'Our focus is on infrastructure operators with embedded concession rights, regulatory protections or natural monopoly characteristics. We structure these businesses as institutionally-governed platforms capable of attracting long-duration capital from insurance and pension mandates.'
-    },
-    water:{
-      title:'Water',
-      img:'https://images.unsplash.com/photo-1446941611757-91d2c3bd3d45?auto=format&fit=crop&w=900&q=85',
-      body:'Water is the defining resource scarcity of the twenty-first century. Utility privatisation, treatment technology, desalination, and agricultural irrigation management represent a convergence of essential service economics and deep structural tailwinds. Southern Europe, facing acute climate stress, is at the epicentre of private sector water infrastructure investment.',
-      angle:'We partner with water treatment and utility management operators in Spain, Portugal and North Africa, geographies where water stress is an investable structural theme. Our platforms attract both impact-oriented and return-driven institutional capital.'
-    },
-    logistics:{
-      title:'Logistics',
-      img:'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=900&q=85',
-      body:'The logistics sector has been permanently reshaped by e-commerce, nearshoring, and the strategic repositioning of global supply chains. Last-mile infrastructure, cold chain networks and intermodal facilities have transitioned from operational assets into institutional-grade real estate. Spain, as both a Southern European consumption market and an Atlantic gateway, occupies a privileged position in European logistics flows.',
-      angle:'Telam Partners focuses on logistics operators with proprietary networks, technology-enabled operations and strategic locations. We structure these businesses as platforms rather than single assets, enabling institutional capital deployment at scale.'
-    },
-    digital:{
-      title:'Digital Infrastructure',
-      img:'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=85',
-      body:'Fibre networks, mobile towers and edge connectivity infrastructure are the arteries of the digital economy. As bandwidth consumption grows exponentially and latency requirements tighten, demand for passive digital infrastructure is structurally uncorrelated to economic cycles. Iberia remains underpenetrated in fibre relative to Northern European peers, creating a substantial deployment opportunity.',
-      angle:'We identify digital infrastructure operators with strong rights-of-way, anchor tenant agreements or spectrum assets, and structure vehicles that enable institutional investors to gain exposure to recurring, contract-backed digital infrastructure cash flows.'
-    },
-    datacenters:{
-      title:'Data Centers',
-      img:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=900&q=85',
-      body:'The AI inference wave has fundamentally changed the economics of data centre investment. Demand from hyperscalers, cloud providers and enterprise clients is growing faster than supply can respond, particularly in markets with access to renewable power, political stability and submarine cable connectivity. Spain sits at the intersection of all three: Atlantic cables, Iberian solar and EU regulatory stability.',
-      angle:'This is our flagship sector. We partner with data centre operators who have secured land, power grid connections and cooling infrastructure, the three constraints that throttle supply, and build institutional platforms that can attract the long-duration capital these assets demand. Data centre operators: we want to speak with you.'
-    },
-    ai:{
-      title:'AI Infrastructure',
-      img:'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&w=900&q=85',
-      body:'AI infrastructure is not a software story. It is a physical infrastructure story. GPU clusters require specialised power delivery, thermal management, network fabric and physical security. Operators who understand how to build, run and scale compute infrastructure for AI workloads are among the most sought-after platform building blocks in the current market. Demand is structurally ahead of supply by years.',
-      angle:'We focus on AI infrastructure operators who combine compute expertise with facility management capabilities. The platform opportunity lies in aggregating specialised operators into vehicles that can absorb institutional capital and deliver contracted compute capacity to enterprise and hyperscaler clients.'
-    },
-    realestate:{
-      title:'Real Estate',
-      img:'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=85',
-      body:'Institutional real estate investment in Southern Europe is at an inflection point. Structural undersupply in residential, life sciences and purpose-built student accommodation, combined with demographic tailwinds and urban migration, creates a compelling backdrop for operational real estate platforms. Value-add strategies in Iberia have consistently outperformed Northern European equivalents on a risk-adjusted basis.',
-      angle:'Our real estate platform approach focuses on operators with genuine asset management capability, not just property ownership. We structure vehicles around asset managers with proven value-creation track records, creating platforms that offer institutional investors operational leverage alongside asset exposure.'
-    },
-    hospitality:{
-      title:'Hospitality',
-      img:'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=900&q=85',
-      body:'Spain is the second most visited country in the world. The structural demand for premium leisure and urban hospitality assets continues to grow, driven by the irreversible rise in experiential spending. Branded residences, boutique hotel platforms and resort developments represent an asset class where operational expertise is the primary value driver.',
-      angle:'We identify hospitality operators with distinctive concepts, proven repositioning capabilities and access to prime locations. We build institutional platforms around these operators to attract private equity and family office capital seeking direct exposure to Spain\'s hospitality premium.'
-    },
-    circular:{
-      title:'Circular Economy',
-      img:'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=900&q=85',
-      body:'The circular economy is the fastest-growing environmental compliance theme in European industry. Extended producer responsibility legislation, plastic and packaging regulations, and end-of-life waste directives are creating mandatory demand for circular economy services. Operators in waste management, industrial symbiosis and material recovery are transitioning from environmental service providers into essential infrastructure businesses.',
-      angle:'We focus on circular economy operators with contracted revenue streams, regulatory authorisations and defensible market positions. As EU environmental regulation tightens, these businesses acquire infrastructure-like characteristics, exactly the profile that institutional capital seeks.'
-    }
-  };
-
-  // Modal logic
-  var backdrop   = document.getElementById('modalBackdrop');
-  var modalImg   = document.getElementById('modalImg');
-  var modalTitle = document.getElementById('modalTitle');
-  var modalBody  = document.getElementById('modalBody');
-  var modalAngle = document.getElementById('modalAngle');
-  var closeBtn   = document.getElementById('modalClose');
-
-  function openModal(key){
-    var d = sectors[key];
-    if(!d) return;
-    modalImg.src          = d.img;
-    modalImg.alt          = d.title;
-    modalTitle.textContent= d.title;
-    modalBody.textContent = d.body;
-    modalAngle.textContent= d.angle;
-    backdrop.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    closeBtn.focus();
-  }
-  function closeModal(){
-    backdrop.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  document.querySelectorAll('.sec-card').forEach(function(card){
-    card.addEventListener('click', function(){ openModal(card.dataset.sector); });
-    card.addEventListener('keydown', function(e){
-      if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openModal(card.dataset.sector); }
-    });
-  });
-  closeBtn.addEventListener('click', closeModal);
-  backdrop.addEventListener('click', function(e){ if(e.target===backdrop) closeModal(); });
-  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
 
   // Contact form
   var form    = document.getElementById('contactForm');
