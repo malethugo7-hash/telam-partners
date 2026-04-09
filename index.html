@@ -165,11 +165,10 @@
 
     /* KPI strip */
     .kpi-strip{background:var(--g900)}
-    .kpi-row{display:flex;border-top:1px solid rgba(255,255,255,.06);
+    .kpi-row{display:flex;justify-content:center;
+      border-top:1px solid rgba(255,255,255,.06);
       border-bottom:1px solid rgba(255,255,255,.06)}
-    .kpi-item{flex:1;padding:2.8rem 3rem;
-      border-right:1px solid rgba(255,255,255,.06)}
-    .kpi-item:last-child{border-right:none}
+    .kpi-item{padding:2.8rem 5rem;border-right:none}
     .kpi-n{font-family:var(--serif);font-size:2.6rem;font-weight:500;
       line-height:1;color:#fff}
     .kpi-n span{color:var(--red)}
@@ -180,34 +179,36 @@
     .venn-outer{max-width:860px;margin:0 auto 5rem}
     .venn-wrap{position:relative;line-height:0}
     .venn-svg{display:block;width:100%;height:auto}
-    .venn-overlay{position:absolute;inset:0;display:grid;
-      grid-template-columns:1fr 164px 1fr;align-items:center;z-index:2}
-    .venn-side{padding:0 2.8rem;text-align:center}
+    .vl-side{position:absolute;top:0;bottom:0;width:36%;
+      display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .vl-ops{left:16%}
+    .vl-funds{right:16%}
+    .vl-mid{position:absolute;left:50%;top:50%;
+      transform:translate(-50%,-50%);z-index:3;
+      display:flex;flex-direction:column;align-items:center;
+      gap:.55rem;text-align:center;
+      background:var(--white);border-radius:50%;
+      width:140px;height:140px;justify-content:center;
+      box-shadow:0 0 0 14px var(--white),0 0 0 15px var(--g100)}
+    .vl-mid span{font-family:var(--serif);font-size:.78rem;
+      line-height:1.4;color:var(--g900);letter-spacing:.02em}
     .vs-label{font-family:var(--serif);font-size:1.05rem;font-weight:500;
       color:var(--g900);margin-bottom:.9rem;letter-spacing:.01em}
     .vs-list{list-style:none;display:flex;flex-direction:column;
       gap:.45rem;align-items:center}
     .vs-list li{font-size:.74rem;color:var(--g600);line-height:1.55;
       letter-spacing:.01em}
-    .venn-mid{display:flex;flex-direction:column;align-items:center;
-      gap:.55rem;text-align:center;
-      background:var(--white);border-radius:50%;
-      width:148px;height:148px;justify-content:center;
-      margin:0 auto;
-      box-shadow:0 0 0 16px var(--white),0 0 0 17px var(--g100)}
-    .venn-mid span{font-family:var(--serif);font-size:.78rem;
-      line-height:1.4;color:var(--g900);letter-spacing:.02em}
     .venn-detail{display:grid;grid-template-columns:1fr 1fr;
       gap:1px;background:var(--g100);max-width:860px;margin:0 auto}
     .vd-col{background:var(--white);padding:2.6rem 3rem}
     .vd-p{font-size:.88rem;color:var(--g600);line-height:1.9}
     @media(max-width:740px){
       .venn-svg{display:none}
-      .venn-wrap{padding:2.8rem 0}
-      .venn-overlay{position:static;display:flex;flex-direction:column;
-        align-items:center;gap:2.2rem}
-      .venn-side{padding:0;width:100%;max-width:280px;text-align:center}
-      .venn-mid{width:128px;height:128px}
+      .venn-wrap{padding:2.8rem 0;display:flex;flex-direction:column;
+        align-items:center;gap:2.2rem;line-height:normal}
+      .vl-side,.vl-ops,.vl-funds{position:static;width:100%;max-width:280px;
+        text-align:center}
+      .vl-mid{position:static;transform:none;width:128px;height:128px}
       .venn-detail{grid-template-columns:1fr}
       .vd-col{padding:2rem 1.8rem}
     }
@@ -263,7 +264,12 @@
       filter:brightness(.58) contrast(1.22) saturate(.28)}
     .sec-overlay{position:absolute;inset:0;
       background:linear-gradient(to top,rgba(0,0,0,.75) 0%,transparent 55%)}
-    /* Label hidden by default, shown on hover */
+    .sec-name{position:absolute;bottom:1rem;left:0;right:0;text-align:center;
+      font-size:.58rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+      color:rgba(255,255,255,.9);z-index:2;
+      opacity:0;transform:translateY(4px);
+      transition:opacity .25s,transform .25s}
+    .sec-card:hover .sec-name{opacity:1;transform:translateY(0)}
 
     /* ── PHOTO BAND ── */
     .photo-band{position:relative;height:380px;overflow:hidden}
@@ -494,31 +500,29 @@
     <!-- Venn diagram -->
     <div class="venn-outer rev d1" aria-label="Operators and Funds intersect at Telam Partners">
       <div class="venn-wrap">
-        <svg class="venn-svg" viewBox="0 0 800 320" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <circle cx="270" cy="160" r="155" fill="rgba(26,25,23,.04)" stroke="#D8D6D1" stroke-width="1"/>
-          <circle cx="530" cy="160" r="155" fill="rgba(196,24,40,.033)" stroke="rgba(196,24,40,.18)" stroke-width="1"/>
+        <svg class="venn-svg" viewBox="0 0 800 330" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <circle cx="275" cy="165" r="160" fill="rgba(26,25,23,.04)" stroke="#D8D6D1" stroke-width="1"/>
+          <circle cx="525" cy="165" r="160" fill="rgba(196,24,40,.033)" stroke="rgba(196,24,40,.18)" stroke-width="1"/>
         </svg>
-        <div class="venn-overlay">
-          <div class="venn-side">
-            <div class="vs-label">Operators</div>
-            <ul class="vs-list">
-              <li>Sector expertise</li>
-              <li>Operational track record</li>
-              <li>Platform potential</li>
-            </ul>
-          </div>
-          <div class="venn-mid">
-            <svg width="36" height="36" aria-hidden="true"><use href="#mark" style="fill:var(--red)"/></svg>
-            <span>Telam<br/>Partners</span>
-          </div>
-          <div class="venn-side">
-            <div class="vs-label">Funds</div>
-            <ul class="vs-list">
-              <li>Institutional capital</li>
-              <li>Global mandate</li>
-              <li>Return requirements</li>
-            </ul>
-          </div>
+        <div class="vl-side vl-ops">
+          <div class="vs-label">Operators</div>
+          <ul class="vs-list">
+            <li>Sector expertise</li>
+            <li>Operational track record</li>
+            <li>Platform potential</li>
+          </ul>
+        </div>
+        <div class="vl-mid">
+          <svg width="34" height="34" aria-hidden="true"><use href="#mark" style="fill:var(--red)"/></svg>
+          <span>Telam<br/>Partners</span>
+        </div>
+        <div class="vl-side vl-funds">
+          <div class="vs-label">Funds</div>
+          <ul class="vs-list">
+            <li>Institutional capital</li>
+            <li>Global mandate</li>
+            <li>Return requirements</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -552,20 +556,8 @@
   <div class="container">
     <div class="kpi-row">
       <div class="kpi-item rev d1">
-        <div class="kpi-n">$18<span>B</span></div>
+        <div class="kpi-n">$14<span>B</span></div>
         <div class="kpi-l">Transaction volume</div>
-      </div>
-      <div class="kpi-item rev d2">
-        <div class="kpi-n">20<span>+</span></div>
-        <div class="kpi-l">Countries</div>
-      </div>
-      <div class="kpi-item rev d3">
-        <div class="kpi-n">10<span>+</span></div>
-        <div class="kpi-l">Real asset sectors</div>
-      </div>
-      <div class="kpi-item rev d4">
-        <div class="kpi-n">2</div>
-        <div class="kpi-l">Offices</div>
       </div>
     </div>
   </div>
@@ -647,51 +639,61 @@
     <div class="sec-card" data-sector="energy" aria-label="Energy">
       <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
       <div class="sec-overlay"></div>
+      <div class="sec-name">Energy</div>
     </div>
 
     <div class="sec-card" data-sector="infrastructure" aria-label="Infrastructure">
       <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
       <div class="sec-overlay"></div>
+      <div class="sec-name">Infrastructure</div>
     </div>
 
     <div class="sec-card" data-sector="water" aria-label="Water">
       <img src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
       <div class="sec-overlay"></div>
+      <div class="sec-name">Water</div>
     </div>
 
     <div class="sec-card" data-sector="logistics" aria-label="Logistics">
       <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
       <div class="sec-overlay"></div>
+      <div class="sec-name">Logistics</div>
     </div>
 
     <div class="sec-card" data-sector="digital" aria-label="Digital Infrastructure">
       <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
       <div class="sec-overlay"></div>
+      <div class="sec-name">Digital Infrastructure</div>
     </div>
 
     <div class="sec-card" data-sector="datacenters" aria-label="Data Centers">
       <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
       <div class="sec-overlay"></div>
+      <div class="sec-name">Data Centers</div>
     </div>
 
     <div class="sec-card" data-sector="ai" aria-label="AI Infrastructure">
       <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
       <div class="sec-overlay"></div>
+      <div class="sec-name">AI Infrastructure</div>
     </div>
 
     <div class="sec-card" data-sector="realestate" aria-label="Real Estate">
       <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
       <div class="sec-overlay"></div>
+      <div class="sec-name">Real Estate</div>
     </div>
 
     <div class="sec-card" data-sector="hospitality" aria-label="Hospitality">
       <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
       <div class="sec-overlay"></div>
+      <div class="sec-name">Hospitality</div>
     </div>
 
     <div class="sec-card" data-sector="circular" aria-label="Circular Economy">
       <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
       <div class="sec-overlay"></div>
+      <div class="sec-name">Circular Economy</div>
     </div>
 
   </div>
