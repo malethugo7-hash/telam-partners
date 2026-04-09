@@ -102,11 +102,13 @@
     /* ── HERO (image only + headline) ── */
     #hero{min-height:100vh;position:relative;overflow:hidden;
       display:flex;align-items:center;justify-content:center}
-    .hero-parallax{position:absolute;inset:-25% 0;will-change:transform}
-    .hero-parallax img{width:100%;height:100%;object-fit:cover;
+    .hero-slide{position:absolute;inset:0;opacity:0;
+      transition:opacity 1.6s ease;will-change:opacity}
+    .hero-slide.active{opacity:1}
+    .hero-slide img{width:100%;height:100%;object-fit:cover;
       object-position:center 45%;display:block}
     .hero-overlay{position:absolute;inset:0;
-      background:rgba(8,6,4,.62)}
+      background:rgba(8,6,4,.60)}
     .hero-stripe{position:absolute;top:0;left:0;right:0;height:3px;
       background:var(--red);z-index:3}
     .hero-content{position:relative;z-index:2;text-align:center;
@@ -465,13 +467,20 @@
 <!-- HERO -->
 <section id="hero" aria-label="Hero">
   <div class="hero-stripe"></div>
-  <div class="hero-parallax" id="heroParallax">
-    <img
-      src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=2000&q=90"
-      alt=""
-      loading="eager"
-      fetchpriority="high"
-    />
+  <div class="hero-slide active">
+    <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=2000&q=90" alt="" loading="eager" fetchpriority="high"/>
+  </div>
+  <div class="hero-slide">
+    <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=2000&q=90" alt="" loading="lazy"/>
+  </div>
+  <div class="hero-slide">
+    <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=2000&q=90" alt="" loading="lazy"/>
+  </div>
+  <div class="hero-slide">
+    <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=2000&q=90" alt="" loading="lazy"/>
+  </div>
+  <div class="hero-slide">
+    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=2000&q=90" alt="" loading="lazy"/>
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -892,19 +901,22 @@
     });
   });
 
-  // Nav scroll class + parallax
+  // Nav scroll class
   var nav = document.getElementById('nav');
-  var hp  = document.getElementById('heroParallax');
-
   function onScroll(){
-    var y = window.scrollY;
-    nav.classList.toggle('sc', y > 60);
-    if(hp && y < window.innerHeight * 1.5){
-      hp.style.transform = 'translateY(' + (y * 0.36) + 'px)';
-    }
+    nav.classList.toggle('sc', window.scrollY > 60);
   }
   window.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
+
+  // Hero slideshow
+  var slides = document.querySelectorAll('.hero-slide');
+  var cur = 0;
+  setInterval(function(){
+    slides[cur].classList.remove('active');
+    cur = (cur + 1) % slides.length;
+    slides[cur].classList.add('active');
+  }, 5000);
 
   // Scroll reveal
   var io = new IntersectionObserver(function(entries){
