@@ -72,13 +72,15 @@
     /* CTA button in nav */
     .nav-links .cta-item a{
       background:var(--red);
-      color:#fff;
-      padding:.44rem 1.3rem;
+      color:#fff !important;
+      padding:.46rem 1.4rem;
+      letter-spacing:.06em !important;
+      white-space:nowrap;
       transition:background .2s;
+      line-height:1.4;
+      display:inline-block;
     }
-    .nav-links .cta-item a:hover{background:var(--red-h);color:#fff}
-    #nav.sc .nav-links .cta-item a{color:#fff}
-    #nav.sc .nav-links .cta-item a:hover{color:#fff}
+    .nav-links .cta-item a:hover{background:var(--red-h)}
     /* Hamburger */
     .hb{display:none;flex-direction:column;gap:5px;
       background:none;border:none;cursor:pointer;padding:4px}
@@ -175,41 +177,41 @@
       text-transform:uppercase;color:rgba(255,255,255,.26);margin-top:.5rem}
 
     /* ── VENN DIAGRAM ── */
-    .venn-outer{position:relative;max-width:760px;height:300px;
-      margin:0 auto 5rem}
-    .venn-c-l,.venn-c-r{position:absolute;width:54%;height:100%;
+    .venn-outer{position:relative;max-width:860px;
+      margin:0 auto 5rem;padding:40px 0}
+    .venn-circles{position:relative;height:280px}
+    .venn-c-l,.venn-c-r{position:absolute;width:56%;height:100%;
       border-radius:50%;top:0}
-    .venn-c-l{left:2%;background:rgba(26,25,23,.045);
+    .venn-c-l{left:0;background:rgba(26,25,23,.04);
       border:1px solid var(--g200)}
-    .venn-c-r{right:2%;background:rgba(196,24,40,.04);
-      border:1px solid rgba(196,24,40,.16)}
+    .venn-c-r{right:0;background:rgba(196,24,40,.035);
+      border:1px solid rgba(196,24,40,.15)}
     .venn-content{position:absolute;inset:0;z-index:2;
-      display:grid;grid-template-columns:1fr 164px 1fr;
+      display:grid;grid-template-columns:1fr 170px 1fr;
       align-items:center}
-    .venn-side{padding:0 2rem}
-    .vs-label{font-family:var(--serif);font-size:1.15rem;font-weight:500;
-      margin-bottom:.9rem;color:var(--g900)}
-    .vs-list{list-style:none;display:flex;flex-direction:column;gap:.45rem}
-    .vs-list li{font-size:.78rem;color:var(--g600);
-      display:flex;align-items:center;gap:8px}
-    .vs-list li::before{content:'';width:3px;height:3px;border-radius:50%;
-      background:var(--red);flex-shrink:0}
+    .venn-side{padding:0 4rem;text-align:center}
+    .vs-label{font-family:var(--serif);font-size:1.1rem;font-weight:500;
+      color:var(--g900);margin-bottom:1rem}
+    .vs-list{list-style:none;display:flex;flex-direction:column;
+      gap:.5rem;align-items:center}
+    .vs-list li{font-size:.76rem;color:var(--g500,var(--g600));line-height:1.5}
     .venn-mid{display:flex;flex-direction:column;align-items:center;
-      gap:.55rem;text-align:center;
+      gap:.6rem;text-align:center;
       background:var(--white);border-radius:50%;
-      width:148px;height:148px;justify-content:center;
-      margin:0 auto;border:1px solid var(--g100);
-      box-shadow:0 0 0 14px rgba(255,255,255,.82)}
-    .venn-mid span{font-family:var(--serif);font-size:.82rem;
-      line-height:1.35;color:var(--g900)}
+      width:152px;height:152px;justify-content:center;
+      margin:0 auto;
+      box-shadow:0 0 0 18px var(--white),0 0 0 19px var(--g100)}
+    .venn-mid span{font-family:var(--serif);font-size:.8rem;
+      line-height:1.4;color:var(--g900);letter-spacing:.01em}
     .venn-detail{display:grid;grid-template-columns:1fr 1fr;
-      gap:1px;background:var(--g100);max-width:760px;margin:0 auto}
-    .vd-col{background:var(--white);padding:2.5rem 2.8rem}
+      gap:1px;background:var(--g100);max-width:860px;margin:0 auto}
+    .vd-col{background:var(--white);padding:2.6rem 3rem}
     .vd-p{font-size:.88rem;color:var(--g600);line-height:1.9}
     @media(max-width:680px){
-      .venn-outer{height:220px}
-      .venn-content{grid-template-columns:1fr 130px 1fr}
-      .venn-mid{width:116px;height:116px}
+      .venn-circles{height:200px}
+      .venn-content{grid-template-columns:1fr 120px 1fr}
+      .venn-side{padding:0 1.5rem}
+      .venn-mid{width:108px;height:108px}
       .venn-detail{grid-template-columns:1fr}
       .vd-col{padding:2rem}
     }
@@ -270,12 +272,6 @@
     .sec-overlay{position:absolute;inset:0;
       background:linear-gradient(to top,rgba(0,0,0,.75) 0%,transparent 55%)}
     /* Label hidden by default, shown on hover */
-    .sec-label{position:absolute;bottom:1.1rem;left:1.1rem;right:.8rem;
-      font-size:.62rem;font-weight:600;letter-spacing:.15em;
-      text-transform:uppercase;color:#fff;line-height:1.3;
-      opacity:0;transform:translateY(4px);
-      transition:opacity .3s,transform .3s}
-    .sec-card:hover .sec-label{opacity:1;transform:none}
     .sec-plus{position:absolute;top:50%;left:50%;
       transform:translate(-50%,-50%) scale(.8);
       width:28px;height:28px;border:1px solid rgba(255,255,255,.25);
@@ -538,28 +534,30 @@
 
     <!-- Venn diagram -->
     <div class="venn-outer rev d1" aria-label="Operators and Funds intersect at Telam Partners">
-      <div class="venn-c-l"></div>
-      <div class="venn-c-r"></div>
-      <div class="venn-content">
-        <div class="venn-side">
-          <div class="vs-label">Operators</div>
-          <ul class="vs-list">
-            <li>Sector expertise</li>
-            <li>Operational track record</li>
-            <li>Platform potential</li>
-          </ul>
-        </div>
-        <div class="venn-mid">
-          <svg width="38" height="38" aria-hidden="true"><use href="#mark" style="fill:var(--red)"/></svg>
-          <span>Telam<br/>Partners</span>
-        </div>
-        <div class="venn-side" style="text-align:right">
-          <div class="vs-label">Funds</div>
-          <ul class="vs-list" style="align-items:flex-end">
-            <li>Institutional capital</li>
-            <li>Global mandate</li>
-            <li>Return requirements</li>
-          </ul>
+      <div class="venn-circles">
+        <div class="venn-c-l"></div>
+        <div class="venn-c-r"></div>
+        <div class="venn-content">
+          <div class="venn-side">
+            <div class="vs-label">Operators</div>
+            <ul class="vs-list">
+              <li>Sector expertise</li>
+              <li>Operational track record</li>
+              <li>Platform potential</li>
+            </ul>
+          </div>
+          <div class="venn-mid">
+            <svg width="38" height="38" aria-hidden="true"><use href="#mark" style="fill:var(--red)"/></svg>
+            <span>Telam<br/>Partners</span>
+          </div>
+          <div class="venn-side">
+            <div class="vs-label">Funds</div>
+            <ul class="vs-list">
+              <li>Institutional capital</li>
+              <li>Global mandate</li>
+              <li>Return requirements</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
