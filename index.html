@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Telam Partners — Senior Advisory</title>
+  <meta name="description" content="Senior-level advisory firm based in Barcelona. Supporting international funds, corporations, and industrial ventures." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── VARIABLES ──────────────────────────────────────────────── */
+    :root {
+      --white:    #FFFFFF;
+      --off:      #F6F5F3;
+      --g100:     #EEEDE9;
+      --g200:     #DDDBD6;
+      --g300:     #B8B6B0;
+      --g400:     #908E89;
+      --g600:     #5A5955;
+      --g800:     #2E2D2A;
+      --g900:     #1A1917;
+      --red:      #C41828;
+      --red-h:    #A51322;
+      --serif:    'Playfair Display', Georgia, serif;
+      --sans:     'DM Sans', system-ui, sans-serif;
+    }
+
+    /* ── RESET ──────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--sans);
+      font-weight: 400;
+      color: var(--g900);
+      background: var(--white);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection { background: var(--red); color: var(--white); }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--off); }
+    ::-webkit-scrollbar-thumb { background: var(--red); }
+
+    /* ── UTILITIES ──────────────────────────────────────────────── */
+    .container { width: 88%; max-width: 1200px; margin: 0 auto; }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 1.4rem;
+    }
+    .eyebrow::before {
+      content: '';
+      display: block; width: 20px; height: 1px;
+      background: var(--red);
+    }
+
+    /* ── SCROLL REVEAL ──────────────────────────────────────────── */
+    .rev {
+      opacity: 0; transform: translateY(22px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .rev.in { opacity: 1; transform: none; }
+    .d1 { transition-delay: 0.08s; }
+    .d2 { transition-delay: 0.16s; }
+    .d3 { transition-delay: 0.24s; }
+    .d4 { transition-delay: 0.32s; }
+    .d5 { transition-delay: 0.40s; }
+
+    /* ══════════════════════════════════════════════════════════════
+       NAVIGATION
+    ══════════════════════════════════════════════════════════════ */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+      background: var(--white);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    #nav.sc { border-color: var(--g100); }
+    .nav-inner {
+      display: flex; align-items: center;
+      justify-content: space-between; height: 74px;
+    }
+
+    /* Logo */
+    .nav-logo {
+      display: flex; align-items: center; gap: 11px;
+      text-decoration: none; color: var(--g900);
+    }
+    .nav-mark { width: 34px; height: 34px; flex-shrink: 0; }
+    .nav-wordmark { display: flex; flex-direction: column; line-height: 1; }
+    .nav-wordmark-main {
+      font-family: var(--serif); font-size: 1.05rem;
+      font-weight: 600; letter-spacing: 0.12em;
+      color: var(--g900);
+    }
+    .nav-wordmark-sub {
+      font-size: 0.52rem; font-weight: 500;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--g400); margin-top: 3px;
+    }
+
+    /* Links */
+    .nav-links {
+      display: flex; align-items: center; gap: 2.4rem; list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      color: var(--g600); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--g900); }
+    .nav-cta {
+      background: var(--red) !important; color: var(--white) !important;
+      padding: 0.52rem 1.3rem; border-radius: 2px;
+    }
+    .nav-cta:hover { background: var(--red-h) !important; }
+
+    /* Hamburger */
+    .hb {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 2px;
+    }
+    .hb span { display: block; width: 22px; height: 1.5px; background: var(--g900); transition: all 0.28s; }
+    .hb.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hb.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hb.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Mobile drawer */
+    .mob {
+      display: none; position: fixed;
+      top: 74px; left: 0; right: 0;
+      background: var(--white);
+      border-bottom: 1px solid var(--g100);
+      z-index: 899; padding: 0.5rem 0;
+    }
+    .mob.open { display: block; }
+    .mob a {
+      display: block; padding: 0.9rem 6%;
+      font-size: 0.82rem; font-weight: 500;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      color: var(--g600); text-decoration: none;
+      border-bottom: 1px solid var(--g100);
+    }
+    .mob a:last-child { border-bottom: none; }
+
+    /* ══════════════════════════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════════════════════════ */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 110px 0 80px;
+      position: relative; overflow: hidden;
+      background: var(--white);
+    }
+
+    /* Faint logo watermark */
+    .hero-watermark {
+      position: absolute;
+      top: 50%; right: -2%;
+      transform: translateY(-50%);
+      width: 56%; max-width: 700px;
+      color: var(--g900); opacity: 0.03;
+      pointer-events: none;
+    }
+
+    /* Thin red top stripe */
+    .hero-stripe {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px; background: var(--red);
+    }
+
+    .hero-body { position: relative; z-index: 1; max-width: 660px; }
+
+    .hero-h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.9rem, 5.2vw, 5rem);
+      font-weight: 500; line-height: 1.09;
+      letter-spacing: -0.01em; margin-bottom: 1.8rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.2s cubic-bezier(.2,.8,.4,1) forwards;
+    }
+    .hero-h1 em { font-style: italic; color: var(--red); }
+
+    .hero-p {
+      font-size: 1.05rem; font-weight: 300;
+      color: var(--g600); line-height: 1.9;
+      max-width: 490px; margin-bottom: 2.8rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.35s cubic-bezier(.2,.8,.4,1) forwards;
+    }
+
+    .hero-ctas {
+      display: flex; align-items: center; gap: 1.6rem; flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.5s cubic-bezier(.2,.8,.4,1) forwards;
+    }
+    .btn-red {
+      display: inline-block;
+      padding: 0.88rem 2.3rem;
+      background: var(--red); color: var(--white);
+      font-family: var(--sans); font-size: 0.78rem;
+      font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; text-decoration: none;
+      border-radius: 2px; transition: background 0.2s, transform 0.2s;
+    }
+    .btn-red:hover { background: var(--red-h); transform: translateY(-1px); }
+    .btn-ghost-dark {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--g600); text-decoration: none;
+      border-bottom: 1px solid var(--g200);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost-dark:hover { color: var(--g900); border-color: var(--g900); }
+
+    .hero-stats {
+      display: flex; gap: 3.5rem; flex-wrap: wrap;
+      margin-top: 5rem; padding-top: 2.8rem;
+      border-top: 1px solid var(--g100);
+      opacity: 0;
+      animation: fadeUp 0.9s 0.65s cubic-bezier(.2,.8,.4,1) forwards;
+    }
+    .h-stat-n {
+      font-family: var(--serif); font-size: 2.1rem;
+      font-weight: 500; color: var(--g900); line-height: 1;
+    }
+    .h-stat-n span { color: var(--red); }
+    .h-stat-l {
+      font-size: 0.7rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--g400); margin-top: 0.35rem;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       SECTION SHARED
+    ══════════════════════════════════════════════════════════════ */
+    .section-top {
+      border-top: 1px solid var(--g100);
+    }
+    .s-num {
+      font-family: var(--serif); font-size: 0.75rem;
+      color: var(--g200); letter-spacing: 0.2em;
+      margin-bottom: 2.2rem; display: block;
+    }
+    .s-h {
+      font-family: var(--serif);
+      font-size: clamp(1.85rem, 3.2vw, 2.65rem);
+      font-weight: 500; line-height: 1.2;
+      margin-bottom: 1.2rem;
+    }
+    .s-h em { font-style: italic; }
+    .s-p {
+      font-size: 0.97rem; color: var(--g600);
+      line-height: 1.9; margin-bottom: 1rem;
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       ABOUT
+    ══════════════════════════════════════════════════════════════ */
+    #about { padding: 110px 0; background: var(--off); }
+
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5.5rem; align-items: start;
+    }
+    .about-right {}
+    .about-kpi-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--g200);
+      border: 1px solid var(--g200);
+      margin-bottom: 1px;
+    }
+    .kpi {
+      background: var(--white);
+      padding: 2rem 2rem 2rem 2rem;
+    }
+    .kpi.dark { background: var(--g900); }
+    .kpi-n {
+      font-family: var(--serif); font-size: 2.8rem;
+      font-weight: 500; line-height: 1; color: var(--g900);
+    }
+    .kpi.dark .kpi-n { color: var(--white); }
+    .kpi-n-red { color: var(--red) !important; }
+    .kpi-l {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--g400); margin-top: 0.4rem;
+    }
+    .kpi.dark .kpi-l { color: rgba(255,255,255,0.35); }
+
+    .about-quote {
+      border-left: 3px solid var(--red);
+      padding: 1.4rem 1.6rem;
+      background: var(--white);
+      border-top: 1px solid var(--g100);
+      border-right: 1px solid var(--g100);
+      border-bottom: 1px solid var(--g100);
+    }
+    .about-quote p {
+      font-family: var(--serif);
+      font-size: 1.05rem; font-style: italic;
+      line-height: 1.7; color: var(--g800);
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       SERVICES
+    ══════════════════════════════════════════════════════════════ */
+    #services { padding: 110px 0; }
+
+    .svc-top {
+      display: flex; justify-content: space-between;
+      align-items: flex-end; gap: 3rem;
+      margin-bottom: 4.5rem;
+    }
+    .svc-top-left { max-width: 480px; }
+    .svc-top-right {
+      font-size: 0.88rem; color: var(--g400);
+      line-height: 1.8; max-width: 320px;
+      text-align: right;
+    }
+
+    .svc-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+    }
+    .svc-card {
+      padding: 3rem 2.5rem;
+      border: 1px solid var(--g100);
+      border-right: none;
+      transition: background 0.25s;
+      position: relative;
+    }
+    .svc-card:first-child { border-left: 1px solid var(--g100); }
+    .svc-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 0; height: 3px;
+      background: var(--red);
+      transition: width 0.35s ease;
+    }
+    .svc-card:hover::before { width: 100%; }
+    .svc-card:hover { background: var(--off); }
+
+    .svc-n {
+      font-size: 0.7rem; color: var(--g300);
+      letter-spacing: 0.18em; margin-bottom: 2.5rem;
+      font-family: var(--serif);
+    }
+    .svc-icon { width: 38px; height: 38px; margin-bottom: 1.6rem; color: var(--g900); }
+    .svc-title {
+      font-family: var(--serif); font-size: 1.3rem;
+      font-weight: 500; line-height: 1.25;
+      margin-bottom: 1rem;
+    }
+    .svc-desc { font-size: 0.9rem; color: var(--g600); line-height: 1.85; }
+    .svc-list {
+      list-style: none;
+      margin-top: 1.8rem; padding-top: 1.8rem;
+      border-top: 1px solid var(--g100);
+    }
+    .svc-list li {
+      font-size: 0.82rem; color: var(--g600);
+      padding: 0.38rem 0;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .svc-list li::before {
+      content: '';
+      width: 4px; height: 4px; border-radius: 50%;
+      background: var(--red); flex-shrink: 0;
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       TEAM
+    ══════════════════════════════════════════════════════════════ */
+    #team { padding: 110px 0; background: var(--off); }
+
+    .team-top { margin-bottom: 4rem; }
+    .team-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      border: 1px solid var(--g200);
+    }
+    .team-card {
+      border-right: 1px solid var(--g200);
+      background: var(--white);
+      transition: background 0.25s;
+    }
+    .team-card:last-child { border-right: none; }
+    .team-card:hover { background: var(--off); }
+
+    /* Portrait */
+    .t-portrait {
+      aspect-ratio: 3/4;
+      background: var(--g900);
+      display: flex; align-items: center;
+      justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .t-portrait::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 40%;
+      background: linear-gradient(to top, rgba(196,24,40,0.15), transparent);
+    }
+    .t-initials {
+      font-family: var(--serif);
+      font-size: 3rem; font-weight: 400;
+      color: rgba(255,255,255,0.12);
+      letter-spacing: 0.05em;
+      user-select: none;
+    }
+    .t-mark-bg {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0.06;
+    }
+    .t-mark-bg svg { width: 70%; color: var(--white); }
+
+    .t-info { padding: 1.4rem 1.2rem 1.6rem; }
+    .t-name {
+      font-family: var(--serif); font-size: 0.98rem;
+      font-weight: 500; line-height: 1.3;
+      margin-bottom: 0.3rem;
+    }
+    .t-role {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 0.8rem;
+    }
+    .t-bio { font-size: 0.78rem; color: var(--g400); line-height: 1.7; }
+
+    /* ══════════════════════════════════════════════════════════════
+       CONTACT
+    ══════════════════════════════════════════════════════════════ */
+    #contact { padding: 110px 0; }
+
+    .contact-grid {
+      display: grid; grid-template-columns: 5fr 7fr;
+      gap: 5.5rem; align-items: start;
+    }
+    .c-detail {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.3rem 0; border-bottom: 1px solid var(--g100);
+    }
+    .c-detail:first-of-type { padding-top: 0; }
+    .c-ico {
+      width: 32px; height: 32px; border: 1px solid var(--g100);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; color: var(--g600);
+    }
+    .c-lbl {
+      font-size: 0.66rem; font-weight: 600;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--g400); margin-bottom: 0.2rem;
+    }
+    .c-val { font-size: 0.92rem; color: var(--g900); line-height: 1.55; }
+    .c-val a { color: var(--g900); text-decoration: none; }
+    .c-val a:hover { color: var(--red); }
+
+    /* Form */
+    .cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .cf-g { display: flex; flex-direction: column; gap: 5px; }
+    .cf-g.full { grid-column: 1/-1; }
+    .cf-g label {
+      font-size: 0.66rem; font-weight: 600;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--g400);
+    }
+    .cf-g input, .cf-g textarea, .cf-g select {
+      width: 100%; border: 1px solid var(--g200); border-radius: 0;
+      padding: 0.8rem 1rem; font-family: var(--sans);
+      font-size: 0.9rem; color: var(--g900);
+      background: var(--white); outline: none;
+      transition: border-color 0.2s;
+    }
+    .cf-g input::placeholder, .cf-g textarea::placeholder { color: var(--g300); }
+    .cf-g input:focus, .cf-g textarea:focus, .cf-g select:focus { border-color: var(--g900); }
+    .cf-g textarea { min-height: 115px; resize: vertical; }
+    .cf-g select option { background: var(--white); }
+    .cf-footer { display: flex; align-items: center; gap: 1.5rem; margin-top: 1.2rem; }
+    .btn-submit {
+      background: var(--g900); color: var(--white);
+      border: none; padding: 0.88rem 2.3rem;
+      font-family: var(--sans); font-size: 0.78rem;
+      font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; cursor: pointer;
+      border-radius: 0; transition: background 0.2s;
+    }
+    .btn-submit:hover { background: var(--red); }
+    .cf-note { font-size: 0.74rem; color: var(--g300); }
+
+    /* ══════════════════════════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════════════════════════ */
+    footer {
+      background: var(--g900); color: rgba(255,255,255,0.4);
+      padding: 4.5rem 0 2.5rem;
+    }
+    footer::before {
+      content: '';
+      display: block; height: 3px;
+      background: var(--red);
+      margin-bottom: 4.5rem;
+    }
+    .ft-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 3.5rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      margin-bottom: 2.5rem;
+    }
+    .ft-brand-logo {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 0.9rem;
+    }
+    .ft-brand-logo svg { width: 28px; height: 28px; color: rgba(255,255,255,0.5); }
+    .ft-brand-name {
+      font-family: var(--serif); font-size: 1rem;
+      font-weight: 500; letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.7);
+    }
+    .ft-brand-desc {
+      font-size: 0.82rem; color: rgba(255,255,255,0.3);
+      line-height: 1.85; max-width: 300px;
+    }
+    .ft-col-h {
+      font-size: 0.63rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      margin-bottom: 1.1rem;
+    }
+    .ft-links { list-style: none; }
+    .ft-links li { margin-bottom: 0.55rem; }
+    .ft-links a {
+      font-size: 0.82rem; color: rgba(255,255,255,0.35);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .ft-links a:hover { color: rgba(255,255,255,0.7); }
+    .ft-bot {
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .ft-copy { font-size: 0.74rem; color: rgba(255,255,255,0.2); }
+    .ft-legal { display: flex; gap: 1.8rem; list-style: none; }
+    .ft-legal a {
+      font-size: 0.72rem; color: rgba(255,255,255,0.2);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .ft-legal a:hover { color: rgba(255,255,255,0.45); }
+
+    /* ══════════════════════════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════════════════════════ */
+    @media (max-width: 1050px) {
+      .team-grid { grid-template-columns: repeat(3, 1fr); }
+      .team-card:nth-child(3) { border-right: none; }
+    }
+    @media (max-width: 860px) {
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+      .svc-grid { grid-template-columns: 1fr; }
+      .svc-card { border-right: 1px solid var(--g100) !important; border-bottom: none; }
+      .svc-top { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+      .svc-top-right { text-align: left; }
+      .hero-watermark { width: 80%; opacity: 0.02; right: -15%; }
+      .ft-grid { grid-template-columns: 1fr 1fr; }
+      .ft-grid > :first-child { grid-column: 1/-1; }
+    }
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+      .hb { display: flex; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .team-card:nth-child(2n) { border-right: none; }
+      .team-card:nth-child(3) { border-right: 1px solid var(--g200); }
+      .hero-stats { gap: 2.2rem; }
+      .cf-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 460px) {
+      .team-grid { grid-template-columns: 1fr 1fr; }
+      .about-kpi-grid { grid-template-columns: 1fr; }
+      .ft-grid { grid-template-columns: 1fr; }
+      .ft-bot { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ──────────────────────────────────────────────── -->
+<nav id="nav">
+  <div class="container">
+    <div class="nav-inner">
+
+      <a href="#hero" class="nav-logo">
+        <!-- Logo mark: 8-triangle geometric star -->
+        <svg class="nav-mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="92,50 50,24 50,76"       stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+          <polygon points="79.7,79.7 68.4,31.6 31.6,68.4" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+          <polygon points="50,92 76,50 24,50"         stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+          <polygon points="20.3,79.7 68.4,68.4 31.6,31.6" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+          <polygon points="8,50 50,76 50,24"          stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+          <polygon points="20.3,20.3 31.6,68.4 68.4,31.6" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+          <polygon points="50,8 24,50 76,50"          stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+          <polygon points="79.7,20.3 31.6,31.6 68.4,68.4" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <div class="nav-wordmark">
+          <span class="nav-wordmark-main">TELAM</span>
+          <span class="nav-wordmark-sub">Partners</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#contact" class="nav-cta">Contact</a></li>
+      </ul>
+
+      <button class="hb" id="hb" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mob" id="mob">
+  <a href="#about"    class="ml">About</a>
+  <a href="#services" class="ml">Services</a>
+  <a href="#team"     class="ml">Team</a>
+  <a href="#contact"  class="ml">Contact</a>
+</div>
+
+<!-- ── HERO ────────────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-stripe"></div>
+
+  <!-- Background logo watermark -->
+  <svg class="hero-watermark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <polygon points="92,50 50,24 50,76"       stroke="currentColor" stroke-width="1" stroke-linejoin="round" fill="none"/>
+    <polygon points="79.7,79.7 68.4,31.6 31.6,68.4" stroke="currentColor" stroke-width="1" stroke-linejoin="round" fill="none"/>
+    <polygon points="50,92 76,50 24,50"         stroke="currentColor" stroke-width="1" stroke-linejoin="round" fill="none"/>
+    <polygon points="20.3,79.7 68.4,68.4 31.6,31.6" stroke="currentColor" stroke-width="1" stroke-linejoin="round" fill="none"/>
+    <polygon points="8,50 50,76 50,24"          stroke="currentColor" stroke-width="1" stroke-linejoin="round" fill="none"/>
+    <polygon points="20.3,20.3 31.6,68.4 68.4,31.6" stroke="currentColor" stroke-width="1" stroke-linejoin="round" fill="none"/>
+    <polygon points="50,8 24,50 76,50"          stroke="currentColor" stroke-width="1" stroke-linejoin="round" fill="none"/>
+    <polygon points="79.7,20.3 31.6,31.6 68.4,68.4" stroke="currentColor" stroke-width="1" stroke-linejoin="round" fill="none"/>
+  </svg>
+
+  <div class="container">
+    <div class="hero-body">
+      <div class="eyebrow" style="opacity:0;animation:fadeUp 0.9s 0.06s cubic-bezier(.2,.8,.4,1) forwards">
+        Barcelona &nbsp;·&nbsp; Global Advisory
+      </div>
+      <h1 class="hero-h1">We do big<br />business <em>differently.</em></h1>
+      <p class="hero-p">
+        Senior advisory for international funds, corporations, and industrial ventures navigating the Spanish market — and beyond.
+      </p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-red">Begin a Conversation</a>
+        <a href="#services" class="btn-ghost-dark">
+          Our Services
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M2 7h10M8 3.5l4 3.5-4 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="h-stat-n">$12<span>B+</span></div>
+          <div class="h-stat-l">Projects Advised</div>
+        </div>
+        <div>
+          <div class="h-stat-n" style="color:var(--g900)">30<span style="color:var(--red)">+</span></div>
+          <div class="h-stat-l">Years Combined Experience</div>
+        </div>
+        <div>
+          <div class="h-stat-n" style="color:var(--g900)">4</div>
+          <div class="h-stat-l">Continents Reached</div>
+        </div>
+        <div>
+          <div class="h-stat-n" style="color:var(--g900)">5</div>
+          <div class="h-stat-l">Senior Partners</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ───────────────────────────────────────────────────── -->
+<section id="about" class="section-top">
+  <div class="container">
+    <div class="about-grid">
+
+      <div>
+        <span class="s-num rev">01</span>
+        <div class="eyebrow rev d1">About Telam Partners</div>
+        <h2 class="s-h rev d2">Precision counsel<br />for <em>complex markets.</em></h2>
+        <p class="s-p rev d3">
+          Telam Partners is a senior-level advisory firm headquartered in Barcelona. We work with international funds, multinational corporations, and industrial ventures seeking strategic guidance across the Spanish market and beyond.
+        </p>
+        <p class="s-p rev d3">
+          Our practice is built on deep market knowledge, long-standing institutional relationships, and a rigorous approach to capital deployment and strategic positioning. We bring senior expertise — not junior teams — to every engagement.
+        </p>
+        <p class="s-p rev d4" style="color:var(--g400);font-size:0.88rem;">
+          We have advised on and supported more than $12 billion USD in projects spanning infrastructure, real estate, financial services, and industrial sectors.
+        </p>
+      </div>
+
+      <div class="rev d2">
+        <div class="about-kpi-grid">
+          <div class="kpi dark">
+            <div class="kpi-n kpi-n-red">$12B+</div>
+            <div class="kpi-l">Projects Advised</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-n">30+</div>
+            <div class="kpi-l">Years Experience</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-n">BCN</div>
+            <div class="kpi-l">Headquarters</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-n">EU</div>
+            <div class="kpi-l">European Reach</div>
+          </div>
+        </div>
+        <div class="about-quote rev d3">
+          <p>"We engage where expertise and relationships converge — at the intersection of capital, strategy, and market access."</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ────────────────────────────────────────────────── -->
+<section id="services" class="section-top">
+  <div class="container">
+
+    <div class="svc-top">
+      <div class="svc-top-left">
+        <span class="s-num rev">02</span>
+        <div class="eyebrow rev d1">What We Do</div>
+        <h2 class="s-h rev d2">Three practice areas.<br />One standard of excellence.</h2>
+      </div>
+      <p class="svc-top-right rev d3">
+        Our mandates span market entry, project finance, and strategic transformation. Each engagement is led from the principal level — with the full weight of the firm behind it.
+      </p>
+    </div>
+
+    <div class="svc-grid">
+
+      <!-- 01 -->
+      <div class="svc-card rev">
+        <div class="svc-n">01</div>
+        <svg class="svc-icon" viewBox="0 0 38 38" fill="none">
+          <circle cx="19" cy="19" r="17" stroke="currentColor" stroke-width="1.5"/>
+          <ellipse cx="19" cy="19" rx="7.5" ry="17" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="2" y1="19" x2="36" y2="19" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="19" y1="2" x2="19" y2="36" stroke="currentColor" stroke-width="1" stroke-opacity="0.4"/>
+        </svg>
+        <h3 class="svc-title">Global Market Entry</h3>
+        <p class="svc-desc">
+          Guiding international corporations and funds through the regulatory, commercial, and relational complexities of entering Spain and the broader Iberian market.
+        </p>
+        <ul class="svc-list">
+          <li>Market intelligence &amp; feasibility</li>
+          <li>Regulatory navigation</li>
+          <li>Local partnership structuring</li>
+          <li>Government relations</li>
+        </ul>
+      </div>
+
+      <!-- 02 -->
+      <div class="svc-card rev d2">
+        <div class="svc-n">02</div>
+        <svg class="svc-icon" viewBox="0 0 38 38" fill="none">
+          <rect x="3" y="13" width="32" height="22" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M3 20h32" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="10" y="26" width="5" height="6" stroke="currentColor" stroke-width="1.3"/>
+          <rect x="17.5" y="23" width="5" height="9" stroke="currentColor" stroke-width="1.3"/>
+          <rect x="25" y="20.5" width="5" height="11.5" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M13 7h12M16 3h6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity="0.4"/>
+        </svg>
+        <h3 class="svc-title">Financing Advisory</h3>
+        <p class="svc-desc">
+          Structuring and securing capital for complex transactions — from real estate and infrastructure to industrial and corporate finance across the European market.
+        </p>
+        <ul class="svc-list">
+          <li>Project finance structuring</li>
+          <li>Debt &amp; equity capital raising</li>
+          <li>Investment vehicle design</li>
+          <li>Lender &amp; investor relations</li>
+        </ul>
+      </div>
+
+      <!-- 03 -->
+      <div class="svc-card rev d3" style="border-right:1px solid var(--g100)">
+        <div class="svc-n">03</div>
+        <svg class="svc-icon" viewBox="0 0 38 38" fill="none">
+          <polygon points="19,3 35,12 35,26 19,35 3,26 3,12" stroke="currentColor" stroke-width="1.5"/>
+          <polygon points="19,11 27,15.5 27,22.5 19,27 11,22.5 11,15.5" stroke="currentColor" stroke-width="1.3"/>
+          <circle cx="19" cy="19" r="3" stroke="currentColor" stroke-width="1.3"/>
+        </svg>
+        <h3 class="svc-title">Strategic Advisory</h3>
+        <p class="svc-desc">
+          Senior counsel for boards and principals facing pivotal strategic decisions — M&amp;A, restructurings, joint ventures, and long-term competitive positioning.
+        </p>
+        <ul class="svc-list">
+          <li>M&amp;A and transaction advisory</li>
+          <li>Corporate restructuring</li>
+          <li>Joint venture negotiation</li>
+          <li>Board-level strategic counsel</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── TEAM ────────────────────────────────────────────────────── -->
+<section id="team" class="section-top">
+  <div class="container">
+    <div class="team-top">
+      <span class="s-num rev">03</span>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:2rem;">
+        <div>
+          <div class="eyebrow rev d1">Executive Team</div>
+          <h2 class="s-h rev d2" style="margin-bottom:0">Senior expertise.<br />Every engagement.</h2>
+        </div>
+        <p class="rev d3" style="font-size:0.88rem;color:var(--g400);max-width:340px;line-height:1.8;margin-bottom:0">
+          Our partners bring decades of institutional experience. You work with principals — not associates.
+        </p>
+      </div>
+    </div>
+
+    <div class="team-grid">
+
+      <!-- Jaime Malet -->
+      <div class="team-card rev">
+        <div class="t-portrait">
+          <div class="t-mark-bg">
+            <svg viewBox="0 0 100 100" fill="none">
+              <polygon points="92,50 50,24 50,76"       stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="79.7,79.7 68.4,31.6 31.6,68.4" stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="50,92 76,50 24,50"         stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="20.3,79.7 68.4,68.4 31.6,31.6" stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="8,50 50,76 50,24"          stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="20.3,20.3 31.6,68.4 68.4,31.6" stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="50,8 24,50 76,50"          stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="79.7,20.3 31.6,31.6 68.4,68.4" stroke="currentColor" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+          <span class="t-initials">JM</span>
+        </div>
+        <div class="t-info">
+          <div class="t-name">Jaime Malet</div>
+          <div class="t-role">Founding Partner &amp; CEO</div>
+          <div class="t-bio">Leads the firm's strategy and principal relationships. Deep expertise in cross-border transactions and institutional advisory.</div>
+        </div>
+      </div>
+
+      <!-- Silvia Sorribas -->
+      <div class="team-card rev d1">
+        <div class="t-portrait" style="background:#222220">
+          <div class="t-mark-bg">
+            <svg viewBox="0 0 100 100" fill="none">
+              <polygon points="92,50 50,24 50,76"       stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="79.7,79.7 68.4,31.6 31.6,68.4" stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="50,92 76,50 24,50"         stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="20.3,79.7 68.4,68.4 31.6,31.6" stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="8,50 50,76 50,24"          stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="20.3,20.3 31.6,68.4 68.4,31.6" stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="50,8 24,50 76,50"          stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="79.7,20.3 31.6,31.6 68.4,68.4" stroke="currentColor" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+          <span class="t-initials">SS</span>
+        </div>
+        <div class="t-info">
+          <div class="t-name">Silvia Sorribas</div>
+          <div class="t-role">Partner</div>
+          <div class="t-bio">Specialises in financing structures and investor relations across European real estate and infrastructure markets.</div>
+        </div>
+      </div>
+
+      <!-- Javier Vega de Seoane -->
+      <div class="team-card rev d2">
+        <div class="t-portrait" style="background:#1E1E1C">
+          <div class="t-mark-bg">
+            <svg viewBox="0 0 100 100" fill="none">
+              <polygon points="92,50 50,24 50,76"       stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="79.7,79.7 68.4,31.6 31.6,68.4" stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="50,92 76,50 24,50"         stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="20.3,79.7 68.4,68.4 31.6,31.6" stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="8,50 50,76 50,24"          stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="20.3,20.3 31.6,68.4 68.4,31.6" stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="50,8 24,50 76,50"          stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="79.7,20.3 31.6,31.6 68.4,68.4" stroke="currentColor" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+          <span class="t-initials">JV</span>
+        </div>
+        <div class="t-info">
+          <div class="t-name">Javier Vega de Seoane</div>
+          <div class="t-role">Partner</div>
+          <div class="t-bio">Brings extensive network across corporate strategy, industrial ventures, and government relations.</div>
+        </div>
+      </div>
+
+      <!-- Javier Falces -->
+      <div class="team-card rev d3">
+        <div class="t-portrait" style="background:#252523">
+          <div class="t-mark-bg">
+            <svg viewBox="0 0 100 100" fill="none">
+              <polygon points="92,50 50,24 50,76"       stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="79.7,79.7 68.4,31.6 31.6,68.4" stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="50,92 76,50 24,50"         stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="20.3,79.7 68.4,68.4 31.6,31.6" stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="8,50 50,76 50,24"          stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="20.3,20.3 31.6,68.4 68.4,31.6" stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="50,8 24,50 76,50"          stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="79.7,20.3 31.6,31.6 68.4,68.4" stroke="currentColor" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+          <span class="t-initials">JF</span>
+        </div>
+        <div class="t-info">
+          <div class="t-name">Javier Falces</div>
+          <div class="t-role">Partner</div>
+          <div class="t-bio">Focused on market entry strategy and cross-sector advisory for international clients entering the Iberian Peninsula.</div>
+        </div>
+      </div>
+
+      <!-- Luis Crespo -->
+      <div class="team-card rev d4">
+        <div class="t-portrait" style="background:#202020">
+          <div class="t-mark-bg">
+            <svg viewBox="0 0 100 100" fill="none">
+              <polygon points="92,50 50,24 50,76"       stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="79.7,79.7 68.4,31.6 31.6,68.4" stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="50,92 76,50 24,50"         stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="20.3,79.7 68.4,68.4 31.6,31.6" stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="8,50 50,76 50,24"          stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="20.3,20.3 31.6,68.4 68.4,31.6" stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="50,8 24,50 76,50"          stroke="currentColor" stroke-width="2" fill="none"/>
+              <polygon points="79.7,20.3 31.6,31.6 68.4,68.4" stroke="currentColor" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+          <span class="t-initials">LC</span>
+        </div>
+        <div class="t-info">
+          <div class="t-name">Luis Crespo</div>
+          <div class="t-role">Partner</div>
+          <div class="t-bio">Senior advisor with deep expertise in project finance, structured transactions, and international capital markets.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ─────────────────────────────────────────────────── -->
+<section id="contact" class="section-top">
+  <div class="container">
+
+    <div class="contact-grid">
+
+      <div>
+        <span class="s-num rev">04</span>
+        <div class="eyebrow rev d1">Get in Touch</div>
+        <h2 class="s-h rev d2">Let's discuss<br />your <em>next move.</em></h2>
+        <p class="s-p rev d3" style="max-width:360px">
+          We work with a select number of clients at any given time. If you are navigating a complex transaction, market entry, or strategic challenge — we would welcome a conversation.
+        </p>
+
+        <div style="margin-top:2.5rem">
+          <div class="c-detail rev d3">
+            <div class="c-ico">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M12 9.33c-1 0-2-.17-2.93-.47a.83.83 0 0 0-.84.2l-1.4 1.4a10.5 10.5 0 0 1-3.3-3.3l1.4-1.4a.83.83 0 0 0 .2-.83C4.84 3.97 4.67 2.97 4.67 2c0-.46-.37-.83-.84-.83H2c-.46 0-1 .2-1 .83C1 8.07 5.93 13 11.17 13c.6 0 .83-.54.83-1v-1.83c0-.46-.37-.84-.83-.84z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <div class="c-lbl">Telephone</div>
+              <div class="c-val"><a href="tel:+34932387711">T +34 932 38 77 11</a></div>
+            </div>
+          </div>
+          <div class="c-detail rev d4">
+            <div class="c-ico">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M7 1C4.24 1 2 3.24 2 6c0 3.75 5 7 5 7s5-3.25 5-7c0-2.76-2.24-5-5-5z" stroke="currentColor" stroke-width="1.2"/>
+                <circle cx="7" cy="6" r="1.75" stroke="currentColor" stroke-width="1.2"/>
+              </svg>
+            </div>
+            <div>
+              <div class="c-lbl">Office</div>
+              <div class="c-val">Diagonal 463Bis, 9-2<br />08036 Barcelona, Spain</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rev d2">
+        <form onsubmit="submitForm(event)">
+          <div class="cf-row">
+            <div class="cf-g">
+              <label for="fn">First Name</label>
+              <input id="fn" name="fn" type="text" placeholder="John" required />
+            </div>
+            <div class="cf-g">
+              <label for="ln">Last Name</label>
+              <input id="ln" name="ln" type="text" placeholder="Smith" required />
+            </div>
+          </div>
+          <div class="cf-row">
+            <div class="cf-g">
+              <label for="em">Email</label>
+              <input id="em" name="em" type="email" placeholder="john@firm.com" required />
+            </div>
+            <div class="cf-g">
+              <label for="org">Organisation</label>
+              <input id="org" name="org" type="text" placeholder="Firm name" />
+            </div>
+          </div>
+          <div class="cf-row">
+            <div class="cf-g full">
+              <label for="svc">Area of Interest</label>
+              <select id="svc" name="svc">
+                <option value="">Select a service area</option>
+                <option>Global Market Entry</option>
+                <option>Financing Advisory</option>
+                <option>Strategic Advisory</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="cf-row">
+            <div class="cf-g full">
+              <label for="msg">Message</label>
+              <textarea id="msg" name="msg" placeholder="Brief description of your enquiry…"></textarea>
+            </div>
+          </div>
+          <div class="cf-footer">
+            <button type="submit" class="btn-submit" id="submitBtn">Send Enquiry</button>
+            <span class="cf-note">All communications are strictly confidential.</span>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ──────────────────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="ft-grid">
+
+      <div>
+        <div class="ft-brand-logo">
+          <svg viewBox="0 0 100 100" fill="none">
+            <polygon points="92,50 50,24 50,76"       stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+            <polygon points="79.7,79.7 68.4,31.6 31.6,68.4" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+            <polygon points="50,92 76,50 24,50"         stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+            <polygon points="20.3,79.7 68.4,68.4 31.6,31.6" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+            <polygon points="8,50 50,76 50,24"          stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+            <polygon points="20.3,20.3 31.6,68.4 68.4,31.6" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+            <polygon points="50,8 24,50 76,50"          stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+            <polygon points="79.7,20.3 31.6,31.6 68.4,68.4" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <span class="ft-brand-name">TELAM Partners</span>
+        </div>
+        <p class="ft-brand-desc">
+          Senior advisory for international funds, corporations, and industrial ventures. Barcelona-based, globally connected.
+        </p>
+      </div>
+
+      <div>
+        <div class="ft-col-h">Services</div>
+        <ul class="ft-links">
+          <li><a href="#services">Global Market Entry</a></li>
+          <li><a href="#services">Financing Advisory</a></li>
+          <li><a href="#services">Strategic Advisory</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="ft-col-h">Firm</div>
+        <ul class="ft-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#team">Partners</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="ft-bot">
+      <p class="ft-copy">&copy; 2025 Telam Partners S.L. All rights reserved. Barcelona, Spain.</p>
+      <ul class="ft-legal">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Legal Notice</a></li>
+        <li><a href="#">Cookies</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<!-- ── JAVASCRIPT ───────────────────────────────────────────────── -->
+<script>
+  // Navbar scroll state
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('sc', window.scrollY > 30);
+  }, { passive: true });
+
+  // Hamburger
+  const hb  = document.getElementById('hb');
+  const mob = document.getElementById('mob');
+  hb.addEventListener('click', () => {
+    hb.classList.toggle('open');
+    mob.classList.toggle('open');
+  });
+  document.querySelectorAll('.mob a').forEach(a => {
+    a.addEventListener('click', () => {
+      hb.classList.remove('open');
+      mob.classList.remove('open');
+    });
+  });
+
+  // Scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
+  document.querySelectorAll('.rev').forEach(el => io.observe(el));
+
+  // Form
+  function submitForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = 'Enquiry Sent';
+    btn.style.background = '#2e7d52';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Send Enquiry';
+      btn.style.background = '';
+      btn.disabled = false;
+      e.target.reset();
+    }, 3500);
+  }
+</script>
+
+</body>
+</html>
