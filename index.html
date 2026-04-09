@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Telam Partners — Independent Sponsor · Real Assets Platform Builder</title>
+  <meta name="description" content="We help serious operators access serious capital. Telam Partners is an independent sponsor and real assets platform builder."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{
+      --white:#fff;
+      --off:#F7F6F4;
+      --g100:#ECEAE6;
+      --g200:#D8D6D1;
+      --g300:#B4B2AC;
+      --g400:#8C8A85;
+      --g600:#57554F;
+      --g800:#2C2B28;
+      --g900:#1A1917;
+      --red:#C41828;
+      --red-h:#A51322;
+      --serif:'Playfair Display',Georgia,serif;
+      --sans:'DM Sans',system-ui,sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;font-size:16px}
+    body{font-family:var(--sans);color:var(--g900);background:var(--white);
+      line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    ::selection{background:var(--red);color:#fff}
+    ::-webkit-scrollbar{width:3px}
+    ::-webkit-scrollbar-track{background:var(--off)}
+    ::-webkit-scrollbar-thumb{background:var(--red)}
+    .container{width:88%;max-width:1160px;margin:0 auto}
+    .eyebrow{display:inline-flex;align-items:center;gap:12px;
+      font-size:.62rem;font-weight:600;letter-spacing:.26em;
+      text-transform:uppercase;color:var(--red);margin-bottom:1.5rem}
+    .eyebrow::before{content:'';width:16px;height:1px;background:currentColor}
+    .s-h{font-family:var(--serif);font-size:clamp(1.7rem,2.8vw,2.35rem);
+      font-weight:500;line-height:1.22;margin-bottom:1rem}
+    .s-h em{font-style:italic}
+    .s-p{font-size:.92rem;color:var(--g600);line-height:1.95;margin-bottom:1rem}
+    .rev{opacity:0;transform:translateY(16px);
+      transition:opacity .7s ease,transform .7s ease}
+    .rev.in{opacity:1;transform:none}
+    .d1{transition-delay:.07s}.d2{transition-delay:.14s}
+    .d3{transition-delay:.21s}.d4{transition-delay:.28s}
+    .d5{transition-delay:.35s}.d6{transition-delay:.42s}
+
+    /* ── NAV ── */
+    #nav{position:fixed;top:0;left:0;right:0;z-index:900;
+      background:transparent;border-bottom:1px solid transparent;
+      transition:background .4s,border-color .4s}
+    #nav.sc{background:rgba(255,255,255,.97);
+      backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+      border-color:var(--g100)}
+    .nav-inner{display:flex;align-items:center;
+      justify-content:space-between;height:72px}
+    .nav-logo{text-decoration:none;display:flex;align-items:center}
+    .nav-logo svg{height:30px;width:auto}
+    .nav-logo .st0{fill:#fff;transition:fill .4s}
+    .nav-logo .st1{fill:none}
+    #nav.sc .nav-logo .st0{fill:var(--g900)}
+    .nav-links{display:flex;align-items:center;gap:2.4rem;list-style:none}
+    .nav-links a{font-size:.72rem;font-weight:500;letter-spacing:.1em;
+      text-transform:uppercase;color:rgba(255,255,255,.7);text-decoration:none;
+      transition:color .25s}
+    .nav-links a:hover{color:#fff}
+    #nav.sc .nav-links a{color:var(--g600)}
+    #nav.sc .nav-links a:hover{color:var(--g900)}
+    /* CTA button in nav */
+    .nav-links .cta-item a{
+      background:var(--red);
+      color:#fff !important;
+      padding:.46rem 1.4rem;
+      letter-spacing:.06em !important;
+      white-space:nowrap;
+      transition:background .2s;
+      line-height:1.4;
+      display:inline-block;
+    }
+    .nav-links .cta-item a:hover{background:var(--red-h)}
+    /* Hamburger */
+    .hb{display:none;flex-direction:column;gap:5px;
+      background:none;border:none;cursor:pointer;padding:4px}
+    .hb span{display:block;width:22px;height:1.5px;
+      background:#fff;transition:all .28s}
+    #nav.sc .hb span{background:var(--g900)}
+    .hb.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+    .hb.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+    .hb.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+    .mob{display:none;position:fixed;top:72px;left:0;right:0;
+      background:var(--white);border-bottom:1px solid var(--g100);
+      z-index:899;padding:.5rem 0}
+    .mob.open{display:block}
+    .mob a{display:block;padding:.9rem 6%;font-size:.8rem;font-weight:500;
+      letter-spacing:.1em;text-transform:uppercase;color:var(--g600);
+      text-decoration:none;border-bottom:1px solid var(--g100);transition:color .2s}
+    .mob a:hover{color:var(--red)}
+
+    /* ── HERO (image only + headline) ── */
+    #hero{min-height:100vh;position:relative;overflow:hidden;
+      display:flex;align-items:center;justify-content:center}
+    .hero-slide{position:absolute;inset:0;opacity:0;
+      transition:opacity 1.6s ease;will-change:opacity}
+    .hero-slide.active{opacity:1}
+    .hero-slide img{width:100%;height:100%;object-fit:cover;
+      object-position:center 45%;display:block}
+    .hero-overlay{position:absolute;inset:0;
+      background:rgba(8,6,4,.60)}
+    .hero-stripe{position:absolute;top:0;left:0;right:0;height:3px;
+      background:var(--red);z-index:3}
+    .hero-content{position:relative;z-index:2;text-align:center;
+      padding:0 1.5rem}
+    .hero-label{font-size:.62rem;font-weight:600;letter-spacing:.32em;
+      text-transform:uppercase;color:rgba(255,255,255,.42);margin-bottom:1.8rem;
+      opacity:0;animation:fadeUp .9s .1s cubic-bezier(.2,.8,.4,1) forwards}
+    .hero-h1{font-family:var(--serif);
+      font-size:clamp(3rem,6vw,5.8rem);font-weight:500;
+      line-height:1.04;letter-spacing:-.02em;
+      color:#fff;
+      opacity:0;animation:fadeUp .9s .28s cubic-bezier(.2,.8,.4,1) forwards}
+    .hero-h1 em{display:block;font-style:italic;color:rgba(255,255,255,.68)}
+    @keyframes fadeUp{
+      from{opacity:0;transform:translateY(16px)}
+      to{opacity:1;transform:none}
+    }
+
+    /* ── STATEMENT (below hero) ── */
+    #statement{padding:90px 0;background:var(--white);
+      border-top:1px solid var(--g100)}
+    .statement-inner{text-align:center;max-width:800px;margin:0 auto}
+    .statement-q{font-family:var(--serif);
+      font-size:clamp(1.6rem,3.2vw,2.6rem);font-weight:400;
+      line-height:1.28;color:var(--g900)}
+    .statement-line{width:40px;height:2px;background:var(--red);
+      margin:2rem auto 0}
+
+    /* ── POSITIONING ── */
+    #positioning{background:var(--off);border-top:1px solid var(--g100)}
+    .pos-intro{padding:100px 0 60px;text-align:center}
+    .pos-intro .s-h{font-size:clamp(1.5rem,2.4vw,2.1rem)}
+    .pos-grid{display:grid;grid-template-columns:1fr 1fr;
+      gap:1px;background:var(--g200)}
+    .pos-panel{background:var(--off);padding:4rem 3.8rem 4.5rem}
+    .pos-panel.dark{background:var(--g900)}
+    .pos-tag{font-size:.6rem;font-weight:600;letter-spacing:.24em;
+      text-transform:uppercase;color:var(--red);margin-bottom:1.8rem;
+      display:flex;align-items:center;gap:10px}
+    .pos-tag::before{content:'';width:14px;height:1px;background:var(--red)}
+    .pos-panel.dark .pos-tag{color:rgba(196,24,40,.75)}
+    .pos-panel.dark .pos-tag::before{background:rgba(196,24,40,.75)}
+    .pos-h{font-family:var(--serif);font-size:1.6rem;font-weight:500;
+      line-height:1.22;margin-bottom:1.2rem;color:var(--g900)}
+    .pos-panel.dark .pos-h{color:#fff}
+    .pos-p{font-size:.88rem;color:var(--g600);line-height:1.95;margin-bottom:1.6rem}
+    .pos-panel.dark .pos-p{color:rgba(255,255,255,.42)}
+    .pos-list{list-style:none;margin-top:.5rem}
+    .pos-list li{font-size:.83rem;color:var(--g600);
+      padding:.55rem 0;border-bottom:1px solid var(--g200);
+      display:flex;align-items:flex-start;gap:10px;line-height:1.6}
+    .pos-list li::before{content:'';width:4px;height:4px;border-radius:50%;
+      background:var(--red);flex-shrink:0;margin-top:.65rem}
+    .pos-panel.dark .pos-list li{color:rgba(255,255,255,.42);
+      border-color:rgba(255,255,255,.07)}
+
+    /* KPI strip */
+    .kpi-strip{background:var(--g900)}
+    .kpi-row{display:flex;justify-content:center;
+      border-top:1px solid rgba(255,255,255,.06);
+      border-bottom:1px solid rgba(255,255,255,.06)}
+    .kpi-item{padding:2.8rem 5rem;border-right:none}
+    .kpi-n{font-family:var(--serif);font-size:2.6rem;font-weight:500;
+      line-height:1;color:#fff}
+    .kpi-n span{color:var(--red)}
+    .kpi-l{font-size:.6rem;font-weight:600;letter-spacing:.14em;
+      text-transform:uppercase;color:rgba(255,255,255,.26);margin-top:.5rem}
+
+    /* ── VENN DIAGRAM ── */
+    .venn-outer{max-width:860px;margin:0 auto 5rem}
+    .venn-wrap{position:relative;line-height:0}
+    .venn-svg{display:block;width:100%;height:auto}
+    .vl-side{position:absolute;top:0;bottom:0;width:40%;
+      display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .vl-ops{left:7%}
+    .vl-funds{right:7%}
+    .vl-mid{position:absolute;left:50%;top:50%;
+      transform:translate(-50%,-50%);z-index:3;
+      display:flex;flex-direction:column;align-items:center;
+      gap:.4rem;text-align:center}
+    .vl-mid span{font-family:var(--serif);font-size:.72rem;
+      line-height:1.4;color:var(--g700,var(--g800));letter-spacing:.02em}
+    .vs-label{font-family:var(--serif);font-size:1.05rem;font-weight:500;
+      color:var(--g900);margin-bottom:.9rem;letter-spacing:.01em}
+    .vs-list{list-style:none;display:flex;flex-direction:column;
+      gap:.45rem;align-items:center}
+    .vs-list li{font-size:.74rem;color:var(--g600);line-height:1.55;
+      letter-spacing:.01em}
+    .venn-detail{display:grid;grid-template-columns:1fr 1fr;
+      gap:1px;background:var(--g100);max-width:860px;margin:0 auto}
+    .vd-col{background:var(--white);padding:2.6rem 3rem}
+    .vd-p{font-size:.88rem;color:var(--g600);line-height:1.9}
+    @media(max-width:740px){
+      .venn-svg{display:none}
+      .venn-wrap{padding:2.8rem 0;display:flex;flex-direction:column;
+        align-items:center;gap:2.2rem;line-height:normal}
+      .vl-side,.vl-ops,.vl-funds{position:static;width:100%;max-width:280px;
+        text-align:center}
+      .vl-mid{position:static;transform:none}
+      .venn-detail{grid-template-columns:1fr}
+      .vd-col{padding:2rem 1.8rem}
+    }
+
+    /* ── APPROACH ── */
+    #approach{padding:110px 0;background:var(--white);
+      border-top:1px solid var(--g100)}
+    .approach-layout{display:grid;grid-template-columns:4fr 8fr;
+      gap:5rem;align-items:start}
+    .approach-steps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;
+      background:var(--g100)}
+    .step{background:var(--white);padding:2.6rem 2.2rem}
+    .step-n{font-family:var(--serif);font-size:2.8rem;font-weight:400;
+      color:var(--g100);line-height:1;margin-bottom:1.4rem;
+      display:block;transition:color .3s}
+    .step:hover .step-n{color:var(--red)}
+    .step-t{font-family:var(--serif);font-size:1rem;font-weight:500;
+      margin-bottom:.65rem;line-height:1.3}
+    .step-p{font-size:.82rem;color:var(--g600);line-height:1.9}
+
+    /* ── STEPS VISUAL ── */
+    .steps-visual{display:flex;align-items:center;gap:0;
+      justify-content:center;max-width:900px;margin:0 auto}
+    .sv-step{flex:1;text-align:center;padding:2.8rem 2rem;
+      border:1px solid var(--g100);background:var(--white)}
+    .sv-n{font-family:var(--serif);font-size:2.4rem;font-weight:400;
+      color:var(--g100);line-height:1;margin-bottom:1.2rem;
+      transition:color .3s}
+    .sv-step:hover .sv-n{color:var(--red)}
+    .sv-icon{width:40px;height:40px;margin:0 auto 1rem;color:var(--g400)}
+    .sv-icon svg{width:100%;height:100%}
+    .sv-t{font-family:var(--serif);font-size:1rem;font-weight:500;
+      margin-bottom:.6rem;line-height:1.3}
+    .sv-p{font-size:.78rem;color:var(--g400);line-height:1.8;max-width:180px;margin:0 auto}
+    .sv-arrow{flex-shrink:0;width:44px;padding:0 2px}
+    .sv-arrow svg{width:100%;display:block}
+    @media(max-width:680px){
+      .steps-visual{flex-direction:column;gap:1px}
+      .sv-arrow{transform:rotate(90deg);width:32px;height:20px}
+    }
+
+    /* ── SECTORS ── */
+    #sectors{padding:110px 0;background:var(--off);
+      border-top:1px solid var(--g100)}
+    .sec-header{margin-bottom:4rem}
+    .sectors-grid{display:grid;
+      grid-template-columns:repeat(5,1fr);gap:1px;
+      background:var(--g200)}
+    .sec-card{position:relative;aspect-ratio:4/5;
+      overflow:hidden;background:var(--g800)}
+    .sec-card img{position:absolute;inset:0;width:100%;height:100%;
+      object-fit:cover;object-position:center;
+      filter:brightness(.58) contrast(1.22) saturate(.28)}
+    .sec-overlay{position:absolute;inset:0;
+      background:linear-gradient(to top,rgba(0,0,0,.75) 0%,transparent 55%)}
+    .sec-name{position:absolute;bottom:1rem;left:0;right:0;text-align:center;
+      font-size:.58rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+      color:rgba(255,255,255,.9);z-index:2;
+      opacity:0;transform:translateY(4px);
+      transition:opacity .25s,transform .25s}
+    .sec-card:hover .sec-name{opacity:1;transform:translateY(0)}
+
+    /* ── PHOTO BAND ── */
+    .photo-band{position:relative;height:380px;overflow:hidden}
+    .photo-band img{width:100%;height:100%;object-fit:cover;
+      object-position:center 40%}
+    .photo-band-overlay{position:absolute;inset:0;
+      background:rgba(12,9,6,.7);
+      display:flex;align-items:center;justify-content:center;
+      text-align:center;padding:2rem}
+    .pb-h{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.6rem);
+      font-weight:400;color:#fff;line-height:1.25;max-width:700px}
+    .pb-h em{font-style:italic;color:rgba(255,255,255,.6)}
+    .pb-line{width:36px;height:2px;background:var(--red);margin:1.4rem auto}
+
+    /* ── IMAGE BAND ── */
+    .img-band{position:relative;height:42vh;min-height:260px;
+      overflow:hidden;background:var(--g900)}
+    .img-band img{position:absolute;inset:0;width:100%;height:100%;
+      object-fit:cover;
+      filter:brightness(.48) contrast(1.18) saturate(.22);
+      transform:scale(1.04);transition:transform 8s ease}
+    .img-band:hover img{transform:scale(1)}
+
+    /* ── TEAM ── */
+    #team{padding:110px 0;background:var(--white);
+      border-top:1px solid var(--g100)}
+    .team-header{margin-bottom:4.5rem}
+    .team-list{border-top:1px solid var(--g100)}
+    .tm{display:grid;grid-template-columns:3fr 3fr 6fr;
+      gap:2rem;align-items:start;
+      padding:2.2rem 0;border-bottom:1px solid var(--g100);
+      transition:background .2s}
+    .tm:hover{background:transparent}
+    .tm-name{font-family:var(--serif);font-size:1.05rem;font-weight:500;
+      line-height:1.25}
+    .tm-role{font-size:.62rem;font-weight:600;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--red);margin-top:.3rem}
+    .tm-title{font-size:.8rem;color:var(--g400);line-height:1;
+      padding-top:.25rem}
+    .tm-bio{font-size:.85rem;color:var(--g600);line-height:1.85}
+
+    /* ── CONTACT ── */
+    #contact{padding:110px 0;background:var(--off);
+      border-top:1px solid var(--g100)}
+    .contact-grid{display:grid;grid-template-columns:5fr 7fr;
+      gap:6rem;align-items:start}
+    .c-detail{display:flex;align-items:flex-start;gap:1rem;
+      padding:1.1rem 0;border-bottom:1px solid var(--g200)}
+    .c-detail:first-of-type{padding-top:0}
+    .c-ico{width:26px;height:26px;display:flex;align-items:center;
+      justify-content:center;flex-shrink:0;color:var(--g400)}
+    .c-ico svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.5}
+    .c-lbl{font-size:.6rem;font-weight:600;letter-spacing:.18em;
+      text-transform:uppercase;color:var(--g400);margin-bottom:.15rem}
+    .c-val{font-size:.88rem;color:var(--g900);line-height:1.55}
+    .c-val a{color:var(--g900);text-decoration:none;transition:color .2s}
+    .c-val a:hover{color:var(--red)}
+    .cf-row{display:grid;grid-template-columns:1fr 1fr;
+      gap:.8rem;margin-bottom:.8rem}
+    .cf-g{display:flex;flex-direction:column;gap:5px}
+    .cf-g.full{grid-column:1/-1}
+    .cf-g label{font-size:.6rem;font-weight:600;letter-spacing:.18em;
+      text-transform:uppercase;color:var(--g400)}
+    .cf-g input,.cf-g textarea,.cf-g select{width:100%;
+      border:1px solid var(--g200);border-radius:0;
+      padding:.72rem .95rem;font-family:var(--sans);
+      font-size:.88rem;color:var(--g900);background:var(--white);
+      outline:none;transition:border-color .2s;-webkit-appearance:none}
+    .cf-g input::placeholder,.cf-g textarea::placeholder{color:var(--g300)}
+    .cf-g input:focus,.cf-g textarea:focus,.cf-g select:focus{
+      border-color:var(--g900)}
+    .cf-g textarea{min-height:96px;resize:vertical}
+    .cf-footer{display:flex;align-items:center;gap:1.5rem;
+      flex-wrap:wrap;margin-top:1rem}
+    .btn-submit{background:var(--g900);color:#fff;border:none;
+      padding:.8rem 2.2rem;font-family:var(--sans);font-size:.72rem;
+      font-weight:600;letter-spacing:.15em;text-transform:uppercase;
+      cursor:pointer;transition:background .2s;display:inline-block}
+    .btn-submit:hover{background:var(--red)}
+    .cf-note{font-size:.7rem;color:var(--g300)}
+    .form-success{display:none;padding:1.4rem 1.6rem;
+      background:var(--white);border-left:3px solid var(--red);
+      font-family:var(--serif);font-size:.92rem;font-style:italic;
+      color:var(--g800);line-height:1.7}
+
+    /* ── FOOTER ── */
+    footer{background:var(--g900);padding:0 0 2rem}
+    .ft-top-bar{height:3px;background:var(--red);margin-bottom:4.5rem}
+    .ft-grid{display:grid;grid-template-columns:2.5fr 1fr 1fr;
+      gap:4rem;padding-bottom:3rem;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      margin-bottom:2rem}
+    .ft-logo-wrap{margin-bottom:1rem}
+    .ft-logo-wrap svg{height:24px;width:auto}
+    .ft-logo-wrap .st0{fill:rgba(255,255,255,.48)}
+    .ft-logo-wrap .st1{fill:none}
+    .ft-desc{font-size:.8rem;color:rgba(255,255,255,.26);
+      line-height:1.9;max-width:270px}
+    .ft-col-h{font-size:.58rem;font-weight:600;letter-spacing:.22em;
+      text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:1rem}
+    .ft-links{list-style:none}
+    .ft-links li{margin-bottom:.5rem}
+    .ft-links a{font-size:.8rem;color:rgba(255,255,255,.3);
+      text-decoration:none;transition:color .2s}
+    .ft-links a:hover{color:rgba(255,255,255,.65)}
+    .ft-bot{display:flex;justify-content:space-between;
+      align-items:center;flex-wrap:wrap;gap:1rem}
+    .ft-copy{font-size:.7rem;color:rgba(255,255,255,.16)}
+    .ft-legal{display:flex;gap:1.8rem;list-style:none}
+    .ft-legal a{font-size:.68rem;color:rgba(255,255,255,.16);
+      text-decoration:none;transition:color .2s}
+    .ft-legal a:hover{color:rgba(255,255,255,.44)}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:860px){
+      .approach-layout{grid-template-columns:1fr;gap:2.5rem}
+      .approach-steps{grid-template-columns:1fr}
+      .pos-grid{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr;gap:3.5rem}
+      .sectors-grid{grid-template-columns:repeat(2,1fr)}
+      .kpi-row{flex-wrap:wrap}
+      .kpi-item{flex:1 1 50%;border-bottom:1px solid rgba(255,255,255,.06)}
+      .ft-grid{grid-template-columns:1fr 1fr}
+      .ft-grid>:first-child{grid-column:1/-1}
+      .tm{grid-template-columns:1fr 1fr;gap:1rem}
+      .tm-bio{grid-column:1/-1}
+    }
+    @media(max-width:680px){
+      .nav-links{display:none}
+      .hb{display:flex}
+      .sectors-grid{grid-template-columns:repeat(2,1fr)}
+      .cf-row{grid-template-columns:1fr}
+      .modal-body{padding:2rem 2rem 2.5rem}
+      .tm{grid-template-columns:1fr;gap:.5rem}
+    }
+    @media(max-width:460px){
+      .kpi-item{flex:1 1 100%}
+      .ft-grid{grid-template-columns:1fr}
+      .ft-bot{flex-direction:column;align-items:flex-start}
+      .pos-panel{padding:2.8rem 2rem}
+    }
+  </style>
+</head>
+<body>
+
+<!-- SVG SYMBOLS -->
+<svg style="display:none" aria-hidden="true">
+  <defs>
+    <symbol id="mark" viewBox="207 95 430 430">
+      <path d="M619.26,331.67l-54.37-9.87v-41.98l54.37-9.87c4.33-0.79,7.62-4.1,8.37-8.44c0.75-4.34-1.22-8.56-5.03-10.77l-57.71-33.32v-63.88c0-4.36-2.63-8.17-6.71-9.71c-4.07-1.54-8.57-0.43-11.46,2.84l-35.22,39.92l-38.67-22.33l16.59-49.35c1.39-4.13,0.11-8.58-3.27-11.34c-3.37-2.76-7.98-3.13-11.76-0.95l-54.17,31.28l-54.17-31.28c-3.77-2.18-8.39-1.81-11.76,0.96c-3.37,2.76-4.65,7.21-3.27,11.34l16.59,49.35l-39.19,22.63l-35.49-40.23c-2.88-3.27-7.39-4.39-11.45-2.84c-4.08,1.54-6.71,5.35-6.71,9.71v64.34l-56.92,32.86c-3.81,2.2-5.79,6.43-5.04,10.77c0.75,4.34,4.04,7.65,8.37,8.44l53.58,9.73v42.27l-53.58,9.73c-4.33,0.79-7.62,4.1-8.37,8.44c-0.75,4.34,1.23,8.56,5.04,10.76l56.92,32.86v66.04c0,4.4,2.67,8.23,6.81,9.75c1.19,0.44,2.42,0.65,3.62,0.65c2.98,0,5.84-1.29,7.87-3.68l35.4-41.75l39.15,22.6l-16.59,49.35c-1.39,4.13-0.11,8.58,3.27,11.34c1.91,1.57,4.23,2.36,6.56,2.36c1.78,0,3.57-0.46,5.2-1.41l54.17-31.28l54.17,31.28c1.63,0.94,3.42,1.41,5.2,1.41c2.33,0,4.65-0.8,6.56-2.36c3.37-2.76,4.65-7.21,3.26-11.34l-16.59-49.35l38.62-22.3l35.14,41.44c2.03,2.39,4.89,3.68,7.87,3.68c1.21,0,2.43-0.21,3.62-0.65c4.13-1.52,6.81-5.34,6.81-9.75v-65.59l57.71-33.32c3.81-2.2,5.79-6.42,5.03-10.76C626.89,335.77,623.6,332.45,619.26,331.67z M555.51,320.09l-117.03-19.38l117.03-19.19V320.09z M435.85,290.99l77.62-92.44l42.05,24.28v49.15L435.85,290.99L435.85,290.99z M420.75,281.62l-41.8-113.06l41.27-23.83l41.27,23.83L420.75,281.62L420.75,281.62z M555.51,329.62v49.15L513.55,403l-77.17-93.55L555.51,329.62z M617.91,258.86c0.15,0.09,0.6,0.35,0.49,1.04c-0.12,0.69-0.64,0.78-0.81,0.81l-52.7,9.57v-42.03L617.91,258.86z M553.76,152.88c0.11-0.13,0.46-0.52,1.1-0.27c0.65,0.24,0.65,0.76,0.65,0.94v58.46l-35.72-20.62L553.76,152.88z M505.18,193.77l-75.66,90.72l40.27-111.15L505.18,193.77z M479.09,110.75c0.15-0.09,0.6-0.35,1.13,0.09c0.53,0.44,0.37,0.93,0.31,1.09l-15.99,47.56l-34.94-20.17L479.09,110.75z M359.92,111.93c-0.05-0.16-0.22-0.65,0.31-1.09c0.23-0.19,0.44-0.25,0.62-0.25c0.24,0,0.43,0.11,0.51,0.15l49.48,28.57l-34.94,20.17L359.92,111.93z M370.67,173.34l39.8,110.41l-75.71-89.67L370.67,173.34z M403.12,290.55l-118.97-18.71v-48.55l42.32-24.43L403.12,290.55z M284.15,153.54c0-0.17,0-0.69,0.65-0.94c0.15-0.06,0.28-0.08,0.4-0.08c0.39,0,0.62,0.25,0.7,0.35l34.24,38.81l-35.99,20.78V153.54z M222.87,260.71c-0.17-0.03-0.69-0.12-0.81-0.81c-0.12-0.69,0.34-0.95,0.49-1.04l52.23-30.15v41.43L222.87,260.71z M284.15,281.37l116.05,19.34l-116.05,19.52V281.37z M402.63,310.05l-76.25,92.65l-42.23-24.38v-48.55L402.63,310.05z M222.55,342.75c-0.15-0.09-0.6-0.35-0.48-1.04c0.12-0.69,0.64-0.78,0.81-0.82l51.9-9.43v41.43L222.55,342.75z M285.91,450.42c-0.11,0.13-0.45,0.53-1.11,0.29c-0.66-0.24-0.66-0.77-0.66-0.94v-60.63l36.06,20.82L285.91,450.42z M334.63,407.46l74.87-90.33l-38.83,111.13L334.63,407.46z M420.23,319.84l41.27,113.21l-41.27,23.83l-41.28-23.83L420.23,319.84z M361.37,490.86c-0.15,0.09-0.6,0.35-1.14-0.09c-0.53-0.44-0.37-0.93-0.31-1.09l15.99-47.56l34.95,20.18L361.37,490.86z M480.54,489.68c0.05,0.16,0.22,0.66-0.31,1.09c-0.53,0.45-0.98,0.18-1.13,0.09l-49.48-28.57l34.94-20.17L480.54,489.68z M469.79,428.27l-39.54-111.82l75.04,91.32L469.79,428.27z M555.51,449.77c0,0.17,0,0.7-0.66,0.94c-0.65,0.23-1-0.16-1.11-0.29l-34.04-40.15l35.8-20.67V449.77z M617.91,342.75l-53.02,30.61v-42.03l52.7,9.57c0.17,0.03,0.68,0.13,0.81,0.82C618.52,342.4,618.06,342.66,617.91,342.75z"/>
+      <circle cx="419.34" cy="300.71" r="19.14"/>
+    </symbol>
+    <symbol id="logo-h" viewBox="70 80 2280 490">
+      <path class="st0" d="M562.77,359.42l-65.28-11.86v-50.41l65.28-11.85c5.2-0.95,9.15-4.92,10.05-10.13c0.91-5.21-1.47-10.28-6.05-12.93l-69.29-40v-76.7c0-5.23-3.16-9.81-8.05-11.66c-4.89-1.85-10.29-0.52-13.75,3.41l-42.29,47.94l-46.43-26.81l19.92-59.26c1.67-4.96,0.13-10.31-3.92-13.62c-4.04-3.31-9.58-3.76-14.12-1.15l-65.04,37.55l-65.04-37.55c-4.53-2.62-10.08-2.17-14.13,1.15c-4.05,3.31-5.59,8.66-3.92,13.62l19.92,59.26l-47.06,27.17l-42.61-48.3c-3.46-3.92-8.87-5.27-13.75-3.41c-4.89,1.85-8.06,6.43-8.06,11.66v77.25l-68.34,39.45c-4.58,2.64-6.95,7.72-6.05,12.93c0.91,5.21,4.85,9.18,10.05,10.13l64.33,11.68v50.75l-64.33,11.68c-5.2,0.95-9.15,4.93-10.05,10.14c-0.9,5.21,1.47,10.28,6.05,12.92l68.34,39.45v79.3c0,5.29,3.21,9.88,8.17,11.7c1.43,0.52,2.9,0.78,4.35,0.78c3.57,0,7.02-1.55,9.45-4.42l42.5-50.13l47.01,27.14l-19.92,59.26c-1.67,4.96-0.13,10.3,3.92,13.62c2.3,1.88,5.08,2.84,7.88,2.84c2.14,0,4.29-0.56,6.25-1.69l65.04-37.55l65.04,37.55c1.96,1.13,4.11,1.69,6.25,1.69c2.8,0,5.58-0.96,7.88-2.84c4.05-3.31,5.59-8.66,3.92-13.62l-19.92-59.26l46.37-26.77l42.19,49.76c2.43,2.87,5.88,4.42,9.45,4.42c1.45,0,2.91-0.25,4.35-0.78c4.96-1.82,8.17-6.42,8.17-11.7v-78.75l69.29-40c4.58-2.64,6.95-7.71,6.05-12.92C571.92,364.34,567.98,360.37,562.77,359.42z M486.23,345.52l-140.51-23.27l140.51-23.05V345.52z M342.55,310.59l93.2-110.99l50.49,29.15v59.01L342.55,310.59L342.55,310.59z M324.42,299.33l-50.18-135.75l49.56-28.61l49.56,28.61L324.42,299.33L324.42,299.33z M486.23,356.97v59.01l-50.39,29.09l-92.66-112.33L486.23,356.97z M561.15,272c0.18,0.1,0.73,0.42,0.58,1.25c-0.15,0.83-0.77,0.94-0.97,0.98l-63.27,11.49v-50.46L561.15,272z M484.13,144.76c0.13-0.15,0.55-0.63,1.32-0.33c0.78,0.29,0.78,0.92,0.78,1.12v70.2l-42.89-24.76L484.13,144.76z M425.79,193.86l-90.84,108.93l48.35-133.46L425.79,193.86z M394.47,94.17c0.18-0.1,0.72-0.41,1.36,0.11c0.64,0.52,0.44,1.12,0.38,1.31l-19.19,57.1l-41.96-24.22L394.47,94.17z M251.38,95.59c-0.07-0.19-0.26-0.79,0.38-1.31c0.27-0.23,0.53-0.3,0.75-0.3c0.29,0,0.51,0.13,0.61,0.19l59.41,34.3l-41.96,24.22L251.38,95.59z M264.29,169.33l47.79,132.56l-90.9-107.67L264.29,169.33z M303.25,310.06l-142.84-22.47V229.3l50.81-29.33L303.25,310.06z M160.41,145.55c0-0.21,0-0.83,0.78-1.12c0.18-0.07,0.34-0.1,0.48-0.1c0.47,0,0.74,0.31,0.85,0.42l41.11,46.59l-43.21,24.95V145.55z M86.83,274.22c-0.21-0.04-0.83-0.15-0.97-0.98s0.4-1.14,0.58-1.25l62.71-36.2v49.74L86.83,274.22z M160.41,299.03l139.34,23.22l-139.34,23.44V299.03z M302.66,333.46L211.11,444.7l-50.7-29.27v-58.29L302.66,333.46z M86.44,372.72c-0.18-0.11-0.72-0.42-0.58-1.25c0.14-0.83,0.77-0.94,0.97-0.98l62.32-11.32v49.75L86.44,372.72z M162.53,502c-0.13,0.15-0.55,0.63-1.33,0.35c-0.79-0.29-0.79-0.92-0.79-1.13v-72.79l43.3,25L162.53,502z M221.02,450.42l89.89-108.46L264.29,475.4L221.02,450.42z M323.8,345.22l49.56,135.93l-49.56,28.61l-49.56-28.61L323.8,345.22z M253.13,550.56c-0.18,0.1-0.72,0.42-1.36-0.11c-0.64-0.52-0.44-1.12-0.38-1.31l19.19-57.1l41.96,24.22L253.13,550.56z M396.21,549.14c0.07,0.19,0.26,0.79-0.38,1.31c-0.64,0.54-1.18,0.22-1.36,0.11l-59.41-34.3l41.96-24.22L396.21,549.14z M383.3,475.4l-47.47-134.26l90.1,109.65L383.3,475.4z M486.23,501.23c0,0.21,0,0.84-0.79,1.13c-0.78,0.27-1.2-0.19-1.33-0.35l-40.87-48.2l42.99-24.82V501.23z M561.15,372.72l-63.66,36.75v-50.46l63.27,11.49c0.2,0.04,0.82,0.15,0.97,0.98C561.87,372.31,561.33,372.62,561.15,372.72z"/>
+      <circle class="st0" cx="322.73" cy="322.25" r="22.98"/>
+      <path class="st0" d="M926.55,196.21h-84.17v282.71c0,16.41-12.71,29.12-29.12,29.12c-15.88,0-29.12-12.71-29.12-29.12V196.21H700.5c-16.41,0-29.12-13.76-29.12-29.64c0-16.41,12.71-29.12,29.12-29.12h226.06c15.88,0,29.12,12.71,29.12,29.12C955.67,182.45,942.43,196.21,926.55,196.21z"/>
+      <path class="st0" d="M1021.5,478.92V166.57c0-16.41,12.71-29.12,29.12-29.12h0.53c0,0,0,0,1.06,0h171.53c15.35,0,29.12,12.71,29.12,29.12c0,16.41-13.77,29.64-29.12,29.64h-143.47v96.89h123.36c15.88,0,29.12,13.76,29.12,29.12c0,16.41-13.23,29.65-29.12,29.65h-123.36v97.41h143.47c15.35,0,29.12,13.23,29.12,29.64c0,15.89-13.77,29.12-29.12,29.12h-171.53c-1.06,0-1.06-0.53-1.06-0.53l-0.53,0.53C1034.21,508.04,1021.5,494.81,1021.5,478.92z"/>
+      <path class="st0" d="M1343.15,478.92V166.57c0-15.88,12.71-29.12,29.12-29.12c16.41,0,29.64,13.24,29.64,29.12v282.71h143.47c15.35,0,29.12,13.23,29.12,29.64c0,15.89-13.77,29.12-29.12,29.12h-171.53c-1.06,0-1.06,0-1.06,0c-0.53,0-0.53,0-0.53,0C1355.86,508.04,1343.15,494.81,1343.15,478.92z"/>
+      <path class="st0" d="M1850.21,420.69h-128.64l-25.94,68.83c-4.77,11.64-15.88,18.53-27.52,18.53c-3.71,0-6.89-0.53-10.06-1.59c-15.35-5.83-22.77-22.77-17.48-38.12l117-311.82c4.77-11.65,16.41-19.06,28.06-18.53c12.17-0.53,23.3,6.88,28.05,18.53l117,311.82c5.29,15.35-2.12,32.3-17.46,38.12c-2.65,1.05-6.36,1.59-10.06,1.59c-11.65,0-22.77-6.89-27.01-18.53L1850.21,420.69z M1828.51,362.45l-42.88-113.82l-42.89,113.82H1828.51z"/>
+      <path class="st0" d="M2323.18,166.57v312.35c0,15.89-13.78,29.12-29.66,29.12c-16.41,0-29.12-13.23-29.12-29.12V256.03l-76.23,105.89c-5.82,7.94-14.3,12.17-23.82,12.17h-0.53h-0.54c-9.52,0-18.53-4.23-24.35-12.17l-75.71-105.89v222.88c0,15.89-13.23,29.12-29.64,29.12c-15.9,0-29.13-13.23-29.13-29.12V166.57c0-15.88,13.23-29.12,29.13-29.12c0.53,0,0.53,0,1.58,0c8.47,0,18,4.24,23.3,12.18l105.36,146.12l105.35-146.12c5.82-7.94,14.29-12.18,23.82-12.18c0,0,0,0,0.53,0C2309.4,137.98,2323.18,150.69,2323.18,166.57z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- NAV -->
+<nav id="nav" role="navigation" aria-label="Main navigation">
+  <div class="container nav-inner">
+    <a href="#hero" class="nav-logo" aria-label="Telam Partners">
+      <svg aria-hidden="true"><use href="#logo-h"/></svg>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#positioning">About</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#sectors">Sectors</a></li>
+      <li><a href="#team">Team</a></li>
+      <li class="cta-item"><a href="#contact">Get in Touch</a></li>
+    </ul>
+    <button class="hb" id="hbBtn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mob" id="mobMenu" role="navigation" aria-label="Mobile navigation">
+  <a href="#positioning">About</a>
+  <a href="#approach">Approach</a>
+  <a href="#sectors">Sectors</a>
+  <a href="#team">Team</a>
+  <a href="#contact">Get in Touch</a>
+</div>
+
+<!-- HERO -->
+<section id="hero" aria-label="Hero">
+  <div class="hero-stripe"></div>
+  <div class="hero-slide active">
+    <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=2000&q=90" alt="" loading="eager" fetchpriority="high"/>
+  </div>
+  <div class="hero-slide">
+    <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=2000&q=90" alt="" loading="lazy"/>
+  </div>
+  <div class="hero-slide">
+    <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=2000&q=90" alt="" loading="lazy"/>
+  </div>
+  <div class="hero-slide">
+    <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=2000&q=90" alt="" loading="lazy"/>
+  </div>
+  <div class="hero-slide">
+    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=2000&q=90" alt="" loading="lazy"/>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="hero-h1">Real Assets<em>Platform Builder</em></h1>
+  </div>
+</section>
+
+<!-- STATEMENT -->
+<section id="statement">
+  <div class="container">
+    <div class="statement-inner rev">
+      <p class="statement-q">We help serious operators access serious capital.</p>
+      <div class="statement-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- POSITIONING -->
+<section id="positioning">
+  <div class="container" style="padding:110px 0 100px">
+    <div class="rev" style="max-width:520px;margin:0 auto 5rem;text-align:center">
+      <div class="eyebrow" style="justify-content:center">What we do</div>
+      <h2 class="s-h" style="font-size:clamp(1.5rem,2.4vw,2rem)">We sit at the intersection of operators and capital.</h2>
+    </div>
+
+    <!-- Venn diagram -->
+    <div class="venn-outer rev d1" aria-label="Operators and Funds intersect at Telam Partners">
+      <div class="venn-wrap">
+        <svg class="venn-svg" viewBox="0 0 800 340" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <circle cx="240" cy="170" r="185" fill="rgba(26,25,23,.04)" stroke="#D8D6D1" stroke-width="1"/>
+          <circle cx="560" cy="170" r="185" fill="rgba(196,24,40,.033)" stroke="rgba(196,24,40,.18)" stroke-width="1"/>
+        </svg>
+        <div class="vl-side vl-ops">
+          <div class="vs-label">Operators</div>
+          <ul class="vs-list">
+            <li>Sector expertise</li>
+            <li>Operational track record</li>
+            <li>Platform potential</li>
+          </ul>
+        </div>
+        <div class="vl-mid">
+          <svg width="42" height="42" aria-hidden="true"><use href="#mark" style="fill:var(--red)"/></svg>
+          <span>Telam<br/>Partners</span>
+        </div>
+        <div class="vl-side vl-funds">
+          <div class="vs-label">Funds</div>
+          <ul class="vs-list">
+            <li>Institutional capital</li>
+            <li>Global mandate</li>
+            <li>Return requirements</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Two-column detail below venn -->
+    <div class="venn-detail rev d2">
+      <div class="vd-col">
+        <div class="pos-tag">For Operators</div>
+        <p class="vd-p">You have sector expertise and a proven track record. We provide the institutional structure, governance and capital access that turns a great operator into an investable platform.</p>
+        <ul class="pos-list" style="border-top:1px solid var(--g100);margin-top:1rem;padding-top:1rem">
+          <li>Platform structuring and governance</li>
+          <li>Investor narrative and positioning</li>
+          <li>Access to institutional capital</li>
+        </ul>
+      </div>
+      <div class="vd-col">
+        <div class="pos-tag">For Funds</div>
+        <p class="vd-p">The most attractive real asset opportunities sit with specialist operators who lack institutional profile. We source, structure and introduce these platforms so you gain proprietary deal flow.</p>
+        <ul class="pos-list" style="border-top:1px solid var(--g100);margin-top:1rem;padding-top:1rem">
+          <li>Proprietary pipeline across ten sectors</li>
+          <li>Fully structured platform opportunities</li>
+          <li>Track record across $18B in transactions</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section id="approach">
+  <div class="container" style="padding:110px 0">
+    <div class="rev" style="text-align:center;max-width:460px;margin:0 auto 5rem">
+      <div class="eyebrow" style="justify-content:center">How we work</div>
+      <h2 class="s-h">Three steps.<br/><em>One aligned process.</em></h2>
+    </div>
+    <div class="steps-visual">
+      <div class="sv-step rev d1">
+        <div class="sv-n">01</div>
+        <div class="sv-icon">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2">
+            <circle cx="16" cy="12" r="5"/>
+            <path d="M6 26c0-5.5 4.5-9 10-9s10 3.5 10 9"/>
+          </svg>
+        </div>
+        <div class="sv-t">Identify the operator</div>
+        <p class="sv-p">Proven expertise. Defensible position. Clear path to scale.</p>
+      </div>
+      <div class="sv-arrow rev d2">
+        <svg viewBox="0 0 40 16" fill="none" stroke="var(--g300)" stroke-width="1">
+          <path d="M0 8h36M28 2l8 6-8 6"/>
+        </svg>
+      </div>
+      <div class="sv-step rev d2">
+        <div class="sv-n">02</div>
+        <div class="sv-icon">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2">
+            <rect x="4" y="8" width="24" height="18" rx="1"/>
+            <path d="M10 8V6a6 6 0 0112 0v2"/>
+            <path d="M16 17v4M13 19h6"/>
+          </svg>
+        </div>
+        <div class="sv-t">Build the platform</div>
+        <p class="sv-p">Governance, structure and investment thesis for institutional capital.</p>
+      </div>
+      <div class="sv-arrow rev d3">
+        <svg viewBox="0 0 40 16" fill="none" stroke="var(--g300)" stroke-width="1">
+          <path d="M0 8h36M28 2l8 6-8 6"/>
+        </svg>
+      </div>
+      <div class="sv-step rev d3">
+        <div class="sv-n">03</div>
+        <div class="sv-icon">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2">
+            <circle cx="10" cy="16" r="4"/>
+            <circle cx="26" cy="8" r="4"/>
+            <circle cx="26" cy="24" r="4"/>
+            <path d="M14 14l8-4M14 18l8 4"/>
+          </svg>
+        </div>
+        <div class="sv-t">Connect to capital</div>
+        <p class="sv-p">The right fund, at the right moment, with the right structure.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGE BAND -->
+<div class="img-band">
+  <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=2000&q=85" alt="" loading="lazy"/>
+</div>
+
+<!-- SECTORS -->
+<section id="sectors">
+  <div class="container">
+    <div class="sec-header rev">
+      <div class="eyebrow">Sectors</div>
+      <h2 class="s-h" style="max-width:400px">Real assets across the entire spectrum.</h2>
+    </div>
+  </div>
+  <div class="sectors-grid container">
+
+    <div class="sec-card" data-sector="energy" aria-label="Energy">
+      <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
+      <div class="sec-overlay"></div>
+      <div class="sec-name">Energy</div>
+    </div>
+
+    <div class="sec-card" data-sector="infrastructure" aria-label="Infrastructure">
+      <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
+      <div class="sec-overlay"></div>
+      <div class="sec-name">Infrastructure</div>
+    </div>
+
+    <div class="sec-card" data-sector="water" aria-label="Water">
+      <img src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
+      <div class="sec-overlay"></div>
+      <div class="sec-name">Water</div>
+    </div>
+
+    <div class="sec-card" data-sector="logistics" aria-label="Logistics">
+      <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
+      <div class="sec-overlay"></div>
+      <div class="sec-name">Logistics</div>
+    </div>
+
+    <div class="sec-card" data-sector="digital" aria-label="Digital Infrastructure">
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
+      <div class="sec-overlay"></div>
+      <div class="sec-name">Digital Infrastructure</div>
+    </div>
+
+    <div class="sec-card" data-sector="datacenters" aria-label="Data Centers">
+      <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
+      <div class="sec-overlay"></div>
+      <div class="sec-name">Data Centers</div>
+    </div>
+
+    <div class="sec-card" data-sector="ai" aria-label="AI Infrastructure">
+      <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
+      <div class="sec-overlay"></div>
+      <div class="sec-name">AI Infrastructure</div>
+    </div>
+
+    <div class="sec-card" data-sector="realestate" aria-label="Real Estate">
+      <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
+      <div class="sec-overlay"></div>
+      <div class="sec-name">Real Estate</div>
+    </div>
+
+    <div class="sec-card" data-sector="hospitality" aria-label="Hospitality">
+      <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
+      <div class="sec-overlay"></div>
+      <div class="sec-name">Hospitality</div>
+    </div>
+
+    <div class="sec-card" data-sector="circular" aria-label="Circular Economy">
+      <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=600&q=80" alt="" loading="lazy"/>
+      <div class="sec-overlay"></div>
+      <div class="sec-name">Circular Economy</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="container">
+    <div class="team-header rev">
+      <div class="eyebrow">The Team</div>
+      <h2 class="s-h" style="max-width:360px">Practitioners, not advisors.</h2>
+      <p class="s-p" style="max-width:520px;margin-bottom:0">Each member of the Telam Partners team has operated, invested and transacted across the sectors we cover. We bring direct experience to every engagement.</p>
+    </div>
+    <div class="team-list">
+      <div class="tm rev d1">
+        <div>
+          <div class="tm-name">Managing Partner</div>
+          <div class="tm-role">Strategy and Capital Markets</div>
+        </div>
+        <div class="tm-title">Barcelona</div>
+        <p class="tm-bio">Twenty years structuring real asset transactions across Europe, the Americas and Asia. Extensive background in investment banking and private equity at tier-one institutions. Leads firm strategy and investor relationships.</p>
+      </div>
+      <div class="tm rev d2">
+        <div>
+          <div class="tm-name">Partner, Infrastructure</div>
+          <div class="tm-role">Digital and Energy Platforms</div>
+        </div>
+        <div class="tm-title">Barcelona</div>
+        <p class="tm-bio">Deep expertise in energy transition, data infrastructure and critical networks. Structured over six billion dollars in infrastructure transactions across Southern Europe and Latin America over a fifteen-year career.</p>
+      </div>
+      <div class="tm rev d3">
+        <div>
+          <div class="tm-name">Partner, Real Assets</div>
+          <div class="tm-role">Real Estate and Hospitality</div>
+        </div>
+        <div class="tm-title">Barcelona</div>
+        <p class="tm-bio">Specialist in value-add real estate and hospitality platforms. Previously led acquisitions across Iberia, Italy and Portugal for institutional investors. Particular focus on operational platform creation from single-asset bases.</p>
+      </div>
+      <div class="tm rev d4">
+        <div>
+          <div class="tm-name">Director, Origination</div>
+          <div class="tm-role">Operator Relationships</div>
+        </div>
+        <div class="tm-title">Barcelona</div>
+        <p class="tm-bio">Responsible for identifying and qualifying operators across all ten sectors. Extensive network across industrial, logistics and circular economy businesses in Spain and beyond. First point of contact for operators seeking to explore a platform partnership.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div style="padding:110px 0">
+      <div class="contact-grid">
+        <div class="rev">
+          <div class="eyebrow">Contact</div>
+          <h2 class="s-h">Let us talk about your platform.</h2>
+          <p class="s-p">Whether you are an operator looking to scale or a fund seeking real asset deal flow, the conversation starts here.</p>
+          <div style="margin-top:2.2rem">
+            <div class="c-detail">
+              <div class="c-ico">
+                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div>
+                <div class="c-lbl">Email</div>
+                <div class="c-val"><a href="mailto:info@telampartners.com">info@telampartners.com</a></div>
+              </div>
+            </div>
+            <div class="c-detail">
+              <div class="c-ico">
+                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <div class="c-lbl">Offices</div>
+                <div class="c-val">Barcelona</div>
+              </div>
+            </div>
+            <div class="c-detail">
+              <div class="c-ico">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+              </div>
+              <div>
+                <div class="c-lbl">Coverage</div>
+                <div class="c-val">Worldwide</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="rev d2">
+          <form id="contactForm" novalidate>
+            <div class="cf-row">
+              <div class="cf-g">
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" name="firstName" placeholder="James" required/>
+              </div>
+              <div class="cf-g">
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" name="lastName" placeholder="Anderson" required/>
+              </div>
+            </div>
+            <div class="cf-row">
+              <div class="cf-g">
+                <label for="femail">Email</label>
+                <input type="email" id="femail" name="email" placeholder="james@firm.com" required/>
+              </div>
+              <div class="cf-g">
+                <label for="forg">Organisation</label>
+                <input type="text" id="forg" name="organisation" placeholder="Fund / Company"/>
+              </div>
+            </div>
+            <div class="cf-row">
+              <div class="cf-g full">
+                <label for="frole">I am</label>
+                <select id="frole" name="role">
+                  <option value="">Select</option>
+                  <option value="operator">An operator seeking institutional capital</option>
+                  <option value="fund">A fund seeking real asset deal flow</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="cf-row">
+              <div class="cf-g full">
+                <label for="fmsg">Message</label>
+                <textarea id="fmsg" name="message" placeholder="Tell us about your situation"></textarea>
+              </div>
+            </div>
+            <div class="cf-footer">
+              <button type="submit" class="btn-submit">Send Message</button>
+              <span class="cf-note">We respond within 48 hours.</span>
+            </div>
+            <div class="form-success" id="formSuccess">
+              Thank you. We will be in touch within 48 hours.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-top-bar"></div>
+  <div class="container">
+    <div class="ft-grid">
+      <div>
+        <div class="ft-logo-wrap">
+          <svg aria-label="Telam Partners"><use href="#logo-h"/></svg>
+        </div>
+        <p class="ft-desc">Independent Sponsor and Real Assets Platform Builder. Barcelona.</p>
+      </div>
+      <div>
+        <div class="ft-col-h">Navigate</div>
+        <ul class="ft-links">
+          <li><a href="#positioning">About</a></li>
+          <li><a href="#approach">Approach</a></li>
+          <li><a href="#sectors">Sectors</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="ft-col-h">Contact</div>
+        <ul class="ft-links">
+          <li><a href="mailto:info@telampartners.com">info@telampartners.com</a></li>
+          <li><a href="#contact">Barcelona</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <span class="ft-copy">&copy; 2024 Telam Partners. All rights reserved.</span>
+      <ul class="ft-legal">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Legal Notice</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  // Smooth-scroll all internal links (belt-and-suspenders on top of CSS)
+  document.querySelectorAll('a[href^="#"]').forEach(function(link){
+    link.addEventListener('click', function(e){
+      var id = link.getAttribute('href');
+      if(id === '#') return;
+      var target = document.querySelector(id);
+      if(!target) return;
+      e.preventDefault();
+      target.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  });
+
+  // Nav scroll class
+  var nav = document.getElementById('nav');
+  function onScroll(){
+    nav.classList.toggle('sc', window.scrollY > 60);
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // Hero slideshow
+  var slides = document.querySelectorAll('.hero-slide');
+  var cur = 0;
+  setInterval(function(){
+    slides[cur].classList.remove('active');
+    cur = (cur + 1) % slides.length;
+    slides[cur].classList.add('active');
+  }, 5000);
+
+  // Scroll reveal
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.1});
+  document.querySelectorAll('.rev').forEach(function(el){ io.observe(el); });
+
+  // Hamburger
+  var hbBtn   = document.getElementById('hbBtn');
+  var mobMenu = document.getElementById('mobMenu');
+  hbBtn.addEventListener('click', function(){
+    var open = mobMenu.classList.toggle('open');
+    hbBtn.classList.toggle('open', open);
+    hbBtn.setAttribute('aria-expanded', String(open));
+  });
+  mobMenu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      mobMenu.classList.remove('open');
+      hbBtn.classList.remove('open');
+      hbBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+
+  // Contact form
+  var form    = document.getElementById('contactForm');
+  var success = document.getElementById('formSuccess');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var email = document.getElementById('femail').value.trim();
+    var fname = document.getElementById('fname').value.trim();
+    if(!fname || !email){ return; }
+    form.style.display = 'none';
+    success.style.display = 'block';
+    // In production: submit via fetch() to your endpoint
+  });
+
+})();
+</script>
+</body>
+</html>
