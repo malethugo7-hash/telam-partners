@@ -181,19 +181,16 @@
     .venn-outer{max-width:860px;margin:0 auto 5rem}
     .venn-wrap{position:relative;line-height:0}
     .venn-svg{display:block;width:100%;height:auto}
-    .vl-side{position:absolute;top:0;bottom:0;width:36%;
+    .vl-side{position:absolute;top:0;bottom:0;width:40%;
       display:flex;flex-direction:column;align-items:center;justify-content:center}
-    .vl-ops{left:16%}
-    .vl-funds{right:16%}
+    .vl-ops{left:7%}
+    .vl-funds{right:7%}
     .vl-mid{position:absolute;left:50%;top:50%;
       transform:translate(-50%,-50%);z-index:3;
       display:flex;flex-direction:column;align-items:center;
-      gap:.55rem;text-align:center;
-      background:var(--white);border-radius:50%;
-      width:140px;height:140px;justify-content:center;
-      box-shadow:0 0 0 14px var(--white),0 0 0 15px var(--g100)}
-    .vl-mid span{font-family:var(--serif);font-size:.78rem;
-      line-height:1.4;color:var(--g900);letter-spacing:.02em}
+      gap:.4rem;text-align:center}
+    .vl-mid span{font-family:var(--serif);font-size:.72rem;
+      line-height:1.4;color:var(--g700,var(--g800));letter-spacing:.02em}
     .vs-label{font-family:var(--serif);font-size:1.05rem;font-weight:500;
       color:var(--g900);margin-bottom:.9rem;letter-spacing:.01em}
     .vs-list{list-style:none;display:flex;flex-direction:column;
@@ -210,7 +207,7 @@
         align-items:center;gap:2.2rem;line-height:normal}
       .vl-side,.vl-ops,.vl-funds{position:static;width:100%;max-width:280px;
         text-align:center}
-      .vl-mid{position:static;transform:none;width:128px;height:128px}
+      .vl-mid{position:static;transform:none}
       .venn-detail{grid-template-columns:1fr}
       .vd-col{padding:2rem 1.8rem}
     }
@@ -509,9 +506,9 @@
     <!-- Venn diagram -->
     <div class="venn-outer rev d1" aria-label="Operators and Funds intersect at Telam Partners">
       <div class="venn-wrap">
-        <svg class="venn-svg" viewBox="0 0 800 330" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <circle cx="275" cy="165" r="160" fill="rgba(26,25,23,.04)" stroke="#D8D6D1" stroke-width="1"/>
-          <circle cx="525" cy="165" r="160" fill="rgba(196,24,40,.033)" stroke="rgba(196,24,40,.18)" stroke-width="1"/>
+        <svg class="venn-svg" viewBox="0 0 800 340" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <circle cx="240" cy="170" r="185" fill="rgba(26,25,23,.04)" stroke="#D8D6D1" stroke-width="1"/>
+          <circle cx="560" cy="170" r="185" fill="rgba(196,24,40,.033)" stroke="rgba(196,24,40,.18)" stroke-width="1"/>
         </svg>
         <div class="vl-side vl-ops">
           <div class="vs-label">Operators</div>
@@ -522,7 +519,7 @@
           </ul>
         </div>
         <div class="vl-mid">
-          <svg width="34" height="34" aria-hidden="true"><use href="#mark" style="fill:var(--red)"/></svg>
+          <svg width="42" height="42" aria-hidden="true"><use href="#mark" style="fill:var(--red)"/></svg>
           <span>Telam<br/>Partners</span>
         </div>
         <div class="vl-side vl-funds">
@@ -559,18 +556,6 @@
     </div>
   </div>
 </section>
-
-<!-- KPI STRIP -->
-<div class="kpi-strip">
-  <div class="container">
-    <div class="kpi-row">
-      <div class="kpi-item rev d1">
-        <div class="kpi-n">$14<span>B</span></div>
-        <div class="kpi-l">Transaction volume</div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- APPROACH -->
 <section id="approach">
@@ -722,7 +707,7 @@
           <div class="tm-name">Managing Partner</div>
           <div class="tm-role">Strategy and Capital Markets</div>
         </div>
-        <div class="tm-title">Madrid</div>
+        <div class="tm-title">Barcelona</div>
         <p class="tm-bio">Twenty years structuring real asset transactions across Europe, the Americas and Asia. Extensive background in investment banking and private equity at tier-one institutions. Leads firm strategy and investor relationships.</p>
       </div>
       <div class="tm rev d2">
@@ -738,7 +723,7 @@
           <div class="tm-name">Partner, Real Assets</div>
           <div class="tm-role">Real Estate and Hospitality</div>
         </div>
-        <div class="tm-title">Madrid</div>
+        <div class="tm-title">Barcelona</div>
         <p class="tm-bio">Specialist in value-add real estate and hospitality platforms. Previously led acquisitions across Iberia, Italy and Portugal for institutional investors. Particular focus on operational platform creation from single-asset bases.</p>
       </div>
       <div class="tm rev d4">
@@ -778,7 +763,7 @@
               </div>
               <div>
                 <div class="c-lbl">Offices</div>
-                <div class="c-val">Madrid · Barcelona</div>
+                <div class="c-val">Barcelona</div>
               </div>
             </div>
             <div class="c-detail">
@@ -854,7 +839,7 @@
         <div class="ft-logo-wrap">
           <svg aria-label="Telam Partners"><use href="#logo-h"/></svg>
         </div>
-        <p class="ft-desc">Independent Sponsor and Real Assets Platform Builder. Madrid and Barcelona.</p>
+        <p class="ft-desc">Independent Sponsor and Real Assets Platform Builder. Barcelona.</p>
       </div>
       <div>
         <div class="ft-col-h">Navigate</div>
@@ -870,7 +855,6 @@
         <div class="ft-col-h">Contact</div>
         <ul class="ft-links">
           <li><a href="mailto:info@telampartners.com">info@telampartners.com</a></li>
-          <li><a href="#contact">Madrid</a></li>
           <li><a href="#contact">Barcelona</a></li>
         </ul>
       </div>
