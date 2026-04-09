@@ -177,48 +177,37 @@
       text-transform:uppercase;color:rgba(255,255,255,.26);margin-top:.5rem}
 
     /* ── VENN DIAGRAM ── */
-    .venn-outer{position:relative;max-width:860px;
-      margin:0 auto 5rem;padding:40px 0}
-    .venn-circles{position:relative;height:280px}
-    .venn-c-l,.venn-c-r{position:absolute;width:56%;height:100%;
-      border-radius:50%;top:0}
-    .venn-c-l{left:0;background:rgba(26,25,23,.04);
-      border:1px solid var(--g200)}
-    .venn-c-r{right:0;background:rgba(196,24,40,.035);
-      border:1px solid rgba(196,24,40,.15)}
-    .venn-content{position:absolute;inset:0;z-index:2;
-      display:grid;grid-template-columns:1fr 170px 1fr;
-      align-items:center}
-    .venn-side{padding:0 4rem;text-align:center}
-    .vs-label{font-family:var(--serif);font-size:1.1rem;font-weight:500;
-      color:var(--g900);margin-bottom:1rem}
+    .venn-outer{max-width:860px;margin:0 auto 5rem}
+    .venn-wrap{position:relative;line-height:0}
+    .venn-svg{display:block;width:100%;height:auto}
+    .venn-overlay{position:absolute;inset:0;display:grid;
+      grid-template-columns:1fr 164px 1fr;align-items:center;z-index:2}
+    .venn-side{padding:0 2.8rem;text-align:center}
+    .vs-label{font-family:var(--serif);font-size:1.05rem;font-weight:500;
+      color:var(--g900);margin-bottom:.9rem;letter-spacing:.01em}
     .vs-list{list-style:none;display:flex;flex-direction:column;
-      gap:.5rem;align-items:center}
-    .vs-list li{font-size:.76rem;color:var(--g500,var(--g600));line-height:1.5}
+      gap:.45rem;align-items:center}
+    .vs-list li{font-size:.74rem;color:var(--g600);line-height:1.55;
+      letter-spacing:.01em}
     .venn-mid{display:flex;flex-direction:column;align-items:center;
-      gap:.6rem;text-align:center;
+      gap:.55rem;text-align:center;
       background:var(--white);border-radius:50%;
-      width:152px;height:152px;justify-content:center;
+      width:148px;height:148px;justify-content:center;
       margin:0 auto;
-      box-shadow:0 0 0 18px var(--white),0 0 0 19px var(--g100)}
-    .venn-mid span{font-family:var(--serif);font-size:.8rem;
-      line-height:1.4;color:var(--g900);letter-spacing:.01em}
+      box-shadow:0 0 0 16px var(--white),0 0 0 17px var(--g100)}
+    .venn-mid span{font-family:var(--serif);font-size:.78rem;
+      line-height:1.4;color:var(--g900);letter-spacing:.02em}
     .venn-detail{display:grid;grid-template-columns:1fr 1fr;
       gap:1px;background:var(--g100);max-width:860px;margin:0 auto}
     .vd-col{background:var(--white);padding:2.6rem 3rem}
     .vd-p{font-size:.88rem;color:var(--g600);line-height:1.9}
     @media(max-width:740px){
-      /* Venn: drop to vertical stack, hide decorative circles */
-      .venn-outer{padding:0}
-      .venn-circles{height:auto;position:static}
-      .venn-c-l,.venn-c-r{display:none}
-      .venn-content{
-        position:static;
-        display:flex;flex-direction:column;
-        align-items:center;gap:2rem;padding:2.5rem 0}
-      .venn-side{padding:0;width:100%;max-width:300px;text-align:center}
-      .vs-list{align-items:center}
-      .venn-mid{margin:0;width:130px;height:130px}
+      .venn-svg{display:none}
+      .venn-wrap{padding:2.8rem 0}
+      .venn-overlay{position:static;display:flex;flex-direction:column;
+        align-items:center;gap:2.2rem}
+      .venn-side{padding:0;width:100%;max-width:280px;text-align:center}
+      .venn-mid{width:128px;height:128px}
       .venn-detail{grid-template-columns:1fr}
       .vd-col{padding:2rem 1.8rem}
     }
@@ -288,6 +277,15 @@
       font-weight:400;color:#fff;line-height:1.25;max-width:700px}
     .pb-h em{font-style:italic;color:rgba(255,255,255,.6)}
     .pb-line{width:36px;height:2px;background:var(--red);margin:1.4rem auto}
+
+    /* ── IMAGE BAND ── */
+    .img-band{position:relative;height:42vh;min-height:260px;
+      overflow:hidden;background:var(--g900)}
+    .img-band img{position:absolute;inset:0;width:100%;height:100%;
+      object-fit:cover;
+      filter:brightness(.48) contrast(1.18) saturate(.22);
+      transform:scale(1.04);transition:transform 8s ease}
+    .img-band:hover img{transform:scale(1)}
 
     /* ── TEAM ── */
     #team{padding:110px 0;background:var(--white);
@@ -495,10 +493,12 @@
 
     <!-- Venn diagram -->
     <div class="venn-outer rev d1" aria-label="Operators and Funds intersect at Telam Partners">
-      <div class="venn-circles">
-        <div class="venn-c-l"></div>
-        <div class="venn-c-r"></div>
-        <div class="venn-content">
+      <div class="venn-wrap">
+        <svg class="venn-svg" viewBox="0 0 800 320" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <circle cx="270" cy="160" r="155" fill="rgba(26,25,23,.04)" stroke="#D8D6D1" stroke-width="1"/>
+          <circle cx="530" cy="160" r="155" fill="rgba(196,24,40,.033)" stroke="rgba(196,24,40,.18)" stroke-width="1"/>
+        </svg>
+        <div class="venn-overlay">
           <div class="venn-side">
             <div class="vs-label">Operators</div>
             <ul class="vs-list">
@@ -508,7 +508,7 @@
             </ul>
           </div>
           <div class="venn-mid">
-            <svg width="38" height="38" aria-hidden="true"><use href="#mark" style="fill:var(--red)"/></svg>
+            <svg width="36" height="36" aria-hidden="true"><use href="#mark" style="fill:var(--red)"/></svg>
             <span>Telam<br/>Partners</span>
           </div>
           <div class="venn-side">
@@ -628,6 +628,11 @@
     </div>
   </div>
 </section>
+
+<!-- IMAGE BAND -->
+<div class="img-band">
+  <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=2000&q=85" alt="" loading="lazy"/>
+</div>
 
 <!-- SECTORS -->
 <section id="sectors">
